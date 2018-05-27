@@ -1,0 +1,93 @@
+object Form1: TForm1
+  Left = 231
+  Height = 466
+  Top = 168
+  Width = 723
+  Caption = 'Form1'
+  ClientHeight = 466
+  ClientWidth = 723
+  LCLVersion = '1.6.4.0'
+  object pageContas: TPageControl
+    Left = 0
+    Height = 440
+    Top = 26
+    Width = 723
+    ActivePage = tabClientes
+    Align = alBottom
+    TabIndex = 0
+    TabOrder = 0
+    object tabClientes: TTabSheet
+      Caption = 'tabClientes'
+      ClientHeight = 412
+      ClientWidth = 715
+      object bosta: TPageControl
+        Left = 0
+        Height = 360
+        Top = 8
+        Width = 688
+        ActivePage = tabCliente_Contas
+        Align = alCustom
+        TabIndex = 2
+        TabOrder = 0
+        object tabLista: TTabSheet
+          Caption = 'Lista'
+        end
+        object tabFormulario: TTabSheet
+          Caption = 'Formulario'
+          ClientHeight = 332
+          ClientWidth = 680
+          object Button1: TButton
+            Left = 144
+            Height = 25
+            Top = 208
+            Width = 75
+            Caption = 'Button1'
+            OnClick = Button1Click
+            TabOrder = 0
+          end
+          object Button2: TButton
+            Left = 424
+            Height = 25
+            Top = 208
+            Width = 75
+            Caption = 'Button2'
+            OnClick = Button2Click
+            TabOrder = 1
+          end
+          inline fraCliente1: TfraCliente
+            Top = 8
+            TabOrder = 2
+          end
+        end
+        object tabCliente_Contas: TTabSheet
+          Caption = 'Contas'
+          ClientHeight = 332
+          ClientWidth = 680
+          object LblNome: TLabel
+            Left = 2
+            Height = 15
+            Top = 3
+            Width = 33
+            Caption = 'Nome'
+            ParentColor = False
+          end
+          object lblCpf: TLabel
+            Left = 243
+            Height = 15
+            Top = 3
+            Width = 32
+            Caption = 'lblCpf'
+            ParentColor = False
+          end
+          inline fraCadastracontas1: TfraCadastracontas
+            Left = 2
+            Top = 24
+          end
+        end
+      end
+    end
+    object tabContas: TTabSheet
+      Caption = 'Contas'
+    end
+  end
+end

@@ -1,0 +1,39 @@
+unit uframeCliente;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, DateTimePicker, Forms, Controls, ExtCtrls,
+  ComCtrls, Spin, StdCtrls;
+
+type
+
+  { TFrameCliente }
+
+  TFrameCliente = class(TFrame)
+    edtDataCadastro: TDateTimePicker;
+    edtNome: TLabeledEdit;
+    edtEndereco: TLabeledEdit;
+    edtCPF: TLabeledEdit;
+    edtTelefone: TLabeledEdit;
+    edtTelefone1: TLabeledEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtCidade: TLabeledEdit;
+    edtBairro: TLabeledEdit;
+    edtSituacao: TLabel;
+    spnPerfil: TSpinEdit;
+  private
+    { private declarations }
+  public
+    { public declarations }
+  end;
+
+implementation
+
+{$R *.lfm}
+
+end.
+

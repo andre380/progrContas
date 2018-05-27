@@ -1,0 +1,135 @@
+object Frame1: TFrame1
+  Left = 0
+  Height = 321
+  Top = 0
+  Width = 642
+  ClientHeight = 321
+  ClientWidth = 642
+  TabOrder = 0
+  DesignLeft = 309
+  DesignTop = 251
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 273
+    Top = 48
+    Width = 642
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWindow
+    Columns = <>
+    TabOrder = 0
+  end
+  object edtFiltro: TLabeledEdit
+    Left = 0
+    Height = 23
+    Top = 16
+    Width = 216
+    EditLabel.AnchorSideLeft.Control = edtFiltro
+    EditLabel.AnchorSideRight.Control = edtFiltro
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = edtFiltro
+    EditLabel.Left = 0
+    EditLabel.Height = 15
+    EditLabel.Top = -2
+    EditLabel.Width = 216
+    EditLabel.Caption = 'buscar por nome ou cpf'
+    EditLabel.ParentColor = False
+    TabOrder = 1
+  end
+  object btnLimpaFiltro: TSpeedButton
+    Left = 216
+    Height = 23
+    Hint = 'Limpar o filtro'
+    Top = 16
+    Width = 19
+    Caption = 'x'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Arial Black'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnClick = btnLimpaFiltroClick
+    ShowHint = True
+    ParentFont = False
+    ParentShowHint = False
+  end
+  object chkVencidas: TCheckBox
+    Left = 248
+    Height = 19
+    Top = 0
+    Width = 67
+    Caption = 'Vencidas'
+    OnChange = chkAvencerChange
+    TabOrder = 2
+  end
+  object chkAvencer: TCheckBox
+    Left = 248
+    Height = 19
+    Top = 24
+    Width = 66
+    Caption = 'A vencer'
+    Checked = True
+    OnChange = chkAvencerChange
+    State = cbChecked
+    TabOrder = 3
+  end
+  object chkAntigas: TCheckBox
+    Left = 336
+    Height = 19
+    Top = 0
+    Width = 60
+    Caption = 'Antigas'
+    OnChange = chkAvencerChange
+    TabOrder = 4
+  end
+  object chkPagas: TCheckBox
+    Left = 336
+    Height = 19
+    Top = 24
+    Width = 51
+    Caption = 'Pagas'
+    OnChange = chkAvencerChange
+    TabOrder = 5
+  end
+  object btnPagar: TButton
+    Left = 400
+    Height = 31
+    Top = 8
+    Width = 48
+    Caption = 'Pagar'
+    OnClick = btnPagarClick
+    TabOrder = 6
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 456
+    Height = 23
+    Top = 12
+    Width = 83
+    CenturyFrom = 1941
+    MaxDate = 2958465
+    MinDate = -53780
+    TabOrder = 7
+    TrailingSeparator = False
+    TextForNullDate = 'NULL'
+    LeadingZeros = True
+    Kind = dtkDate
+    TimeFormat = tf24
+    TimeDisplay = tdHMS
+    DateMode = dmComboBox
+    Date = 43239
+    Time = 0.758000914349395
+    UseDefaultSeparators = True
+    HideDateTimeParts = []
+    MonthNames = 'Long'
+  end
+  object btnImprime: TButton
+    Left = 568
+    Height = 31
+    Top = 8
+    Width = 56
+    Caption = 'Imprime'
+    OnClick = btnImprimeClick
+    TabOrder = 8
+  end
+end
