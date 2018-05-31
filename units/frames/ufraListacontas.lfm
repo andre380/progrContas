@@ -36,6 +36,7 @@ object fraListaContas: TfraListaContas
     EditLabel.Caption = 'buscar por nome ou cpf'
     EditLabel.ParentColor = False
     TabOrder = 1
+    OnChange = edtFiltroChange
   end
   object btnLimpaFiltro: TSpeedButton
     Left = 216

@@ -50,13 +50,18 @@ type
     constructor create(database:TIBConnection);
     procedure prepare;
     destructor destroy; override;
-    function q(s:string):string;
     function str(value:integer):string;overload;
     function str(value:Currency):string;overload;
     function strdate(value:TDateTime;mascara:string='yyyy-mm-dd'):string;
   end;
+  function q(s:string):string;
 
 implementation
+
+function q(s: string): string;
+begin
+  result:=QuotedStr(s);
+end;
 
 { Tqrydinamica }
 
@@ -292,10 +297,6 @@ begin
   inherited;
 end;
 
-function Tqrydinamica.q(s: string): string;
-begin
-  result:=QuotedStr(s);
-end;
 
 function Tqrydinamica.str(value: integer): string;
 begin

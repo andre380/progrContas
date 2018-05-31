@@ -42,7 +42,7 @@ implementation
 
 procedure TfrListaCheques.edtFiltroChange(Sender: TObject);
 begin
-  if Assigned(qry) then
+  if Assigned(dtsGrid.DataSet) then
   begin
 
   end
@@ -59,7 +59,7 @@ end;
 
 procedure TfrListaCheques.chkTodosChange(Sender: TObject);
 begin
-  if Assigned(qry) then
+  if Assigned(dtsGrid.DataSet) then
   begin
 
   end

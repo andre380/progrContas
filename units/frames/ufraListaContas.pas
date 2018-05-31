@@ -13,6 +13,7 @@ type
   { TfraListaContas }
 
   TfraListaContas = class(TFrame)
+    procedure edtFiltroChange(Sender: TObject);
   private
     Fqry: TSQLQuery;
     procedure Setqry(AValue: TSQLQuery);
@@ -54,7 +55,7 @@ end;
 
 procedure TfraListaContas.chkAvencerChange(Sender: TObject);
 begin
-  if Assigned(qry) then
+  if Assigned(dtsGrid.DataSet) then
   begin
 
   end
@@ -67,6 +68,17 @@ begin
   edtFiltro.Clear;
 end;
 
+procedure TfraListaContas.edtFiltroChange(Sender: TObject);
+begin
+  if Assigned(dtsGrid.DataSet) then
+  begin
+
+  end
+  else
+  ShowMessage('Erro: qry não definida');
+
+end;
+
 procedure TfraListaContas.Setqry(AValue: TSQLQuery);
 begin
   if Fqry=AValue then Exit;
@@ -76,7 +88,7 @@ end;
 
 procedure TfraListaContas.btnImprimeClick(Sender: TObject);
 begin
-  if Assigned(qry) then
+  if Assigned(dtsGrid.DataSet) then
   begin
 
   end

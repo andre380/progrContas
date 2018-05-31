@@ -1,50 +1,52 @@
 object Form1: TForm1
-  Left = 290
-  Height = 466
-  Top = 141
-  Width = 723
+  Left = 266
+  Height = 550
+  Top = 156
+  Width = 800
   Caption = 'Form1'
-  ClientHeight = 466
-  ClientWidth = 723
+  ClientHeight = 550
+  ClientWidth = 800
   OnCreate = FormCreate
+  Position = poScreenCenter
   LCLVersion = '1.6.4.0'
   object pagePrincipal: TPageControl
     Left = 0
-    Height = 440
-    Top = 26
-    Width = 723
-    ActivePage = pagePrincipalTabCheques
-    Align = alBottom
-    TabIndex = 2
+    Height = 550
+    Top = 0
+    Width = 800
+    ActivePage = PgPrincipalTabClientes
+    Align = alClient
+    Anchors = [akLeft, akRight, akBottom]
+    TabIndex = 0
     TabOrder = 0
     object PgPrincipalTabClientes: TTabSheet
       Caption = 'Clientes'
-      ClientHeight = 412
-      ClientWidth = 715
+      ClientHeight = 522
+      ClientWidth = 792
       object pagecliente: TPageControl
         Left = 0
-        Height = 360
+        Height = 470
         Top = 8
-        Width = 719
-        ActivePage = pageClienteTab_Lista
+        Width = 796
+        ActivePage = pageClienteTab_Contas
         Align = alCustom
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 0
         OnChange = pageclienteChange
         object pageClienteTab_Lista: TTabSheet
           Caption = 'Lista'
-          ClientHeight = 332
-          ClientWidth = 711
+          ClientHeight = 442
+          ClientWidth = 788
           inline fraLisClientes1: TfraLisClientes
-            Height = 332
-            Width = 711
+            Height = 442
+            Width = 788
             Align = alClient
-            ClientHeight = 332
-            ClientWidth = 711
+            ClientHeight = 442
+            ClientWidth = 788
             inherited DBGrid1: TDBGrid
-              Height = 284
-              Width = 711
+              Height = 394
+              Width = 788
             end
             inherited dtsGrid: TDataSource
               DataSet = qryCliente
@@ -80,17 +82,17 @@ object Form1: TForm1
         end
         object pageClienteTab_Contas: TTabSheet
           Caption = 'Contas'
-          ClientHeight = 332
-          ClientWidth = 711
-          inline fraListaContas1: TfraListaContas
-            Height = 332
-            Width = 711
+          ClientHeight = 442
+          ClientWidth = 788
+          inline fraListaContas2: TfraListaContas
+            Height = 442
+            Width = 788
             Align = alClient
-            ClientHeight = 332
-            ClientWidth = 711
+            ClientHeight = 442
+            ClientWidth = 788
             inherited DBGrid1: TDBGrid
-              Height = 284
-              Width = 711
+              Height = 394
+              Width = 788
             end
           end
         end
@@ -114,8 +116,9 @@ object Form1: TForm1
       object btnNovo: TBitBtn
         Left = 0
         Height = 40
-        Top = 371
+        Top = 480
         Width = 54
+        Anchors = [akLeft, akBottom]
         Caption = 'Novo'
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -160,8 +163,9 @@ object Form1: TForm1
       object btnAlterar: TBitBtn
         Left = 54
         Height = 40
-        Top = 372
+        Top = 480
         Width = 54
+        Anchors = [akLeft, akBottom]
         Caption = 'Alterar'
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -206,8 +210,9 @@ object Form1: TForm1
       object btnCancelar: TBitBtn
         Left = 109
         Height = 40
-        Top = 371
+        Top = 480
         Width = 54
+        Anchors = [akLeft, akBottom]
         Caption = 'Cancelar'
         Enabled = False
         Glyph.Data = {
@@ -251,10 +256,11 @@ object Form1: TForm1
         TabOrder = 3
       end
       object btnSalvar: TBitBtn
-        Left = 164
+        Left = 163
         Height = 40
-        Top = 372
+        Top = 480
         Width = 54
+        Anchors = [akLeft, akBottom]
         Caption = 'Salvar'
         Enabled = False
         Glyph.Data = {
@@ -298,10 +304,11 @@ object Form1: TForm1
         TabOrder = 4
       end
       object btnApagar: TBitBtn
-        Left = 217
-        Height = 41
-        Top = 371
+        Left = 218
+        Height = 40
+        Top = 480
         Width = 54
+        Anchors = [akLeft, akBottom]
         Caption = 'Apagar'
         OnClick = btnApagarClick
         TabOrder = 5
@@ -309,17 +316,17 @@ object Form1: TForm1
     end
     object pgPrincipalTabContas: TTabSheet
       Caption = 'Contas'
-      ClientHeight = 412
-      ClientWidth = 715
-      inline fraListaContas2: TfraListaContas
-        Height = 412
-        Width = 715
+      ClientHeight = 522
+      ClientWidth = 792
+      inline fraListaContas1: TfraListaContas
+        Height = 522
+        Width = 792
         Align = alClient
-        ClientHeight = 412
-        ClientWidth = 715
+        ClientHeight = 522
+        ClientWidth = 792
         inherited DBGrid1: TDBGrid
-          Height = 364
-          Width = 715
+          Height = 474
+          Width = 792
         end
       end
     end
@@ -350,15 +357,15 @@ object Form1: TForm1
     UserName = 'sysdba'
     Options = []
     CheckTransactionParams = False
-    left = 376
-    top = 104
+    left = 144
+    top = 192
   end
   object trdefault: TSQLTransaction
     Active = True
     Database = base
     Options = []
-    left = 488
-    top = 104
+    left = 144
+    top = 256
   end
   object qryCliente: TSQLQuery
     FieldDefs = <    
@@ -452,7 +459,7 @@ object Form1: TForm1
     UpdateMode = upWhereAll
     UsePrimaryKeyAsKey = False
     left = 24
-    top = 120
+    top = 336
     object qryClienteCODIGO: TLongintField
       DisplayLabel = 'COD.'
       DisplayWidth = 5
@@ -600,6 +607,7 @@ object Form1: TForm1
     end
   end
   object qryContas: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'NOME'
@@ -645,6 +653,7 @@ object Form1: TForm1
         DataType = ftDate
         Precision = -1
       end>
+    Active = True
     Database = base
     Transaction = trContas
     SQL.Strings = (
@@ -656,6 +665,7 @@ object Form1: TForm1
     top = 192
     object qryContasNOME: TStringField
       DisplayLabel = 'Nome'
+      DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'NOME'
       Index = 0
@@ -687,6 +697,7 @@ object Form1: TForm1
     end
     object qryContasDESCRICAO: TStringField
       DisplayLabel = 'Descrição'
+      DisplayWidth = 50
       FieldKind = fkData
       FieldName = 'DESCRICAO'
       Index = 3
@@ -698,6 +709,7 @@ object Form1: TForm1
     end
     object qryContasVALOR: TBCDField
       DisplayLabel = 'Valor'
+      DisplayWidth = 8
       FieldKind = fkData
       FieldName = 'VALOR'
       Index = 4
@@ -713,6 +725,7 @@ object Form1: TForm1
     end
     object qryContasVALORPAGO: TBCDField
       DisplayLabel = 'Valor Pago'
+      DisplayWidth = 8
       FieldKind = fkData
       FieldName = 'VALORPAGO'
       Index = 5
@@ -938,31 +951,15 @@ object Form1: TForm1
       Required = False
     end
   end
-  object qryDinamica: TSQLQuery
-    FieldDefs = <>
-    Database = base
-    Transaction = trDinamica
-    Options = []
-    Params = <>
-    left = 560
-    top = 88
-  end
-  object trDinamica: TSQLTransaction
-    Active = False
-    Database = base
-    Options = []
-    left = 628
-    top = 88
-  end
   object trcliente: TSQLTransaction
     Active = True
     Database = base
     Options = []
     left = 88
-    top = 120
+    top = 336
   end
   object trContas: TSQLTransaction
-    Active = False
+    Active = True
     Database = base
     Options = []
     left = 88

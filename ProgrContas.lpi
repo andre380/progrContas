@@ -42,7 +42,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="ProgrContas.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -102,6 +102,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="ufraListaCheques"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="units\frames\ufraListaContas.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fraListaContas"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="ufraListacontas"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
