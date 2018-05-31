@@ -8,7 +8,10 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, DBGrids,
   StdCtrls, ComCtrls, ExtCtrls, Grids, Spin, Buttons, uframeCliente,
   ufraListacontas, ufraCadastracontas, ufraListaClientes, ufraListaCheques,
-  DateTimePicker, Types, IBConnection, sqldb, db,uqryDinamicaLZ;
+  ufraCadCheque, DateTimePicker, Types, IBConnection, sqldb, db,
+  dateutils,
+
+  uqryDinamicaLZ,ufuncoes;
 
 type
 
@@ -20,8 +23,8 @@ type
     btnAlterar: TBitBtn;
     btnCancelar: TBitBtn;
     btnSalvar: TBitBtn;
-    Button1: TButton;
-    Button2: TButton;
+    fraCadastracontas1: TfraCadastracontas;
+    fraCadCheque1: TfraCadCheque;
     fraCliente1: TfraCliente;
     base: TIBConnection;
     fraLisClientes1: TfraLisClientes;
@@ -31,6 +34,9 @@ type
     frListaCheques2: TfrListaCheques;
     pagePrincipal: TPageControl;
     pagecliente: TPageControl;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     qryChequesBANCO_DEPOSITO: TStringField;
     qryChequesBANCO_ORIGEM: TStringField;
     qryChequesCLIENTE_CODIGO_CLIENTE: TLongintField;
@@ -93,13 +99,13 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pageclienteChange(Sender: TObject);
     procedure qryClienteAfterScroll(DataSet: TDataSet);
 
     procedure ControlaBotoes(editando:Boolean);
     function salvacliente:Boolean;
+    function criaConta:boolean;
     procedure carregaCliente;
     procedure atualizaclientes;
   private
@@ -141,14 +147,26 @@ begin
 end;
 
 procedure TForm1.btnSalvarClick(Sender: TObject);
+var
+  contaOk: Boolean;
 begin
+  contaok:=true;
   if inCliente or edCliente then
   begin
     if fraCliente1.valida then
     begin
-      salvacliente;
-      inCliente:=false;
-      ControlaBotoes(False);
+      if fraCadastracontas1.alterou then
+      begin
+        contaOk:=fraCadastracontas1.valida;
+      end;
+      if contaok and confirma('salvar as alterações no cliente')  then
+      begin
+        salvacliente;
+        if contaok then
+        criaConta;
+        inCliente:=false;
+        ControlaBotoes(False);
+      end;
     end;
   end;
 
@@ -188,11 +206,12 @@ end;
 procedure TForm1.btnCancelarClick(Sender: TObject);
 begin
   ControlaBotoes(False);
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-  fraCliente1.limpa;
+  IF fraCliente1.Visible THEN
+  begin
+    fraCliente1.limpa;
+    fraCadastracontas1.limpa;
+    carregaCliente;
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -293,6 +312,42 @@ begin
   end;
 end;
 
+function TForm1.criaConta: boolean;
+var
+  newCodigo: LongInt;
+  codcli:string;
+  qry:Tqrydinamica;
+  diadomes, cont: Integer;
+  vencimento: TDate;
+  valor: Currency;
+begin
+  // debug lembrar de ler a variavel codcliente
+
+  qry:=Tqrydinamica.create(base);
+  codcli:=IntToStr(codcliente);
+  vencimento:=fraCadastracontas1.vencimento;
+  valor := fraCadastracontas1.valor/fraCadastracontas1.parcelas;
+  for cont := 1 to fraCadastracontas1.parcelas do
+  begin
+    vencimento:=IncMonth(vencimento);
+    qry.executasql('select max(contas.codigo) from contas where contas.cliente_codigo_cliente = '+q(codcli));
+    newCodigo:=qry.campoint('max')+1;
+    qry.sql:='insert into contas values (:CLIENTE_CODIGO_CLIENTE,:CODIGO,:DESCRICAO,:VALOR,:VALORPAGO,:VENCIMENTO,null)';
+    qry.prepare;
+    qry.ParamByName('CLIENTE_CODIGO_CLIENTE').AsInteger:= codcliente;
+    qry.ParambyName('CODIGO').AsInteger                := newCodigo;
+    qry.ParambyName('DESCRICAO').AsString              := 'p'+IntToStr(cont)+' '+fraCadastracontas1.descricao;
+    qry.ParambyName('VALOR').AsCurrency                := valor;
+    qry.ParambyName('VALORPAGO').AsCurrency            := 0;
+    qry.ParambyName('VENCIMENTO').AsDate               := vencimento;
+    qry.qry.ExecSQL;
+    qry.commit;
+
+  end;
+  result:=true;
+      //atualizacontas;
+end;
+
 procedure TForm1.carregaCliente;
 begin
   fraCliente1.nome           := qryClienteNOME.AsString;
@@ -314,7 +369,6 @@ procedure TForm1.atualizaclientes;
 begin
   trcliente.Active:=false;
   qrycliente.Open;
-  ShowMessage(qrycliente.Transaction.Name);
 end;
 
 end.

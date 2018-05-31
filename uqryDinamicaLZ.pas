@@ -49,6 +49,8 @@ type
     procedure rollback;
     constructor create(database:TIBConnection);
     procedure prepare;
+    function ParamByName(Const AParamName : String) : TParam;
+
     destructor destroy; override;
     function str(value:integer):string;overload;
     function str(value:Currency):string;overload;
@@ -282,7 +284,13 @@ end;
 
 procedure Tqrydinamica.prepare;
 begin
+  qry.SQL.text:=sql;
   qry.Prepare;
+end;
+
+function Tqrydinamica.ParamByName(const AParamName: String): TParam;
+begin
+  result:=qry.ParamByName(AParamName);
 end;
 
 destructor Tqrydinamica.destroy;

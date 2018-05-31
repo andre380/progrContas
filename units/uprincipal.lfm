@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 266
+  Left = 245
   Height = 550
-  Top = 156
+  Top = 148
   Width = 800
   Caption = 'Form1'
   ClientHeight = 550
@@ -49,35 +49,79 @@ object Form1: TForm1
               Width = 788
             end
             inherited dtsGrid: TDataSource
+              AutoEdit = False
               DataSet = qryCliente
             end
           end
         end
         object pageClientetTab_Formulario: TTabSheet
           Caption = 'Formulario'
-          ClientHeight = 332
-          ClientWidth = 711
-          object Button1: TButton
-            Left = 16
-            Height = 25
-            Top = 224
-            Width = 75
-            Caption = 'Button1'
-            OnClick = Button1Click
+          ClientHeight = 442
+          ClientWidth = 788
+          object Panel2: TPanel
+            Left = 0
+            Height = 184
+            Top = 1
+            Width = 600
+            Align = alCustom
+            ClientHeight = 184
+            ClientWidth = 600
+            Color = clAqua
+            ParentColor = False
             TabOrder = 0
+            inline fraCliente1: TfraCliente
+            end
           end
-          object Button2: TButton
-            Left = 424
-            Height = 25
-            Top = 208
-            Width = 75
-            Caption = 'Button2'
-            OnClick = Button2Click
+          object Panel1: TPanel
+            Left = 0
+            Height = 104
+            Top = 185
+            Width = 600
+            ClientHeight = 104
+            ClientWidth = 600
+            Color = clMoneyGreen
+            ParentColor = False
             TabOrder = 1
+            inline fraCadastracontas1: TfraCadastracontas
+              Left = 3
+              object DateTimePicker1: TDateTimePicker[2]
+                Left = 96
+                Height = 23
+                Top = 65
+                Width = 83
+                CenturyFrom = 1941
+                MaxDate = 2958465
+                MinDate = -53780
+                TabOrder = 2
+                TrailingSeparator = False
+                TextForNullDate = 'NULL'
+                LeadingZeros = True
+                Kind = dtkDate
+                TimeFormat = tf24
+                TimeDisplay = tdHMS
+                DateMode = dmComboBox
+                Date = 43239
+                Time = 0.775269282406953
+                UseDefaultSeparators = True
+                HideDateTimeParts = []
+                MonthNames = 'Long'
+              end
+            end
           end
-          inline fraCliente1: TfraCliente
-            Top = 8
+          object Panel3: TPanel
+            Left = 0
+            Height = 107
+            Top = 290
+            Width = 600
+            ClientHeight = 107
+            ClientWidth = 600
+            Color = clSilver
+            ParentColor = False
             TabOrder = 2
+            inline fraCadCheque1: TfraCadCheque
+              Left = 3
+              Top = 4
+            end
           end
         end
         object pageClienteTab_Contas: TTabSheet
@@ -95,6 +139,7 @@ object Form1: TForm1
               Width = 788
             end
             inherited dtsGrid: TDataSource
+              AutoEdit = False
               DataSet = qryContasCli
             end
           end
@@ -330,6 +375,9 @@ object Form1: TForm1
         inherited DBGrid1: TDBGrid
           Height = 474
           Width = 792
+        end
+        inherited dtsGrid: TDataSource
+          DataSet = qryContas
         end
       end
     end

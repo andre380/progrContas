@@ -1,10 +1,10 @@
 object fraCadastracontas: TfraCadastracontas
   Left = 0
-  Height = 249
+  Height = 93
   Top = 0
-  Width = 611
-  ClientHeight = 249
-  ClientWidth = 611
+  Width = 552
+  ClientHeight = 93
+  ClientWidth = 552
   TabOrder = 0
   DesignLeft = 306
   DesignTop = 266
@@ -12,7 +12,8 @@ object fraCadastracontas: TfraCadastracontas
     Left = 4
     Height = 23
     Top = 24
-    Width = 603
+    Width = 544
+    Anchors = [akTop, akLeft, akRight]
     EditLabel.AnchorSideLeft.Control = edtDescricao
     EditLabel.AnchorSideRight.Control = edtDescricao
     EditLabel.AnchorSideRight.Side = asrBottom
@@ -20,11 +21,11 @@ object fraCadastracontas: TfraCadastracontas
     EditLabel.Left = 4
     EditLabel.Height = 15
     EditLabel.Top = 6
-    EditLabel.Width = 603
-    EditLabel.Caption = 'edtDescricao'
+    EditLabel.Width = 544
+    EditLabel.Caption = 'Descricao da Conta'
     EditLabel.ParentColor = False
     TabOrder = 0
-    Text = 'edtDescricao'
+    OnChange = edtDescricaoChange
   end
   object edtValor: TLabeledEdit
     Left = 4
@@ -42,9 +43,9 @@ object fraCadastracontas: TfraCadastracontas
     EditLabel.Caption = 'edtValor'
     EditLabel.ParentColor = False
     TabOrder = 1
-    Text = 'edtValor'
+    OnChange = edtDescricaoChange
   end
-  object DateTimePicker1: TDateTimePicker
+  object edtVencimento: TDateTimePicker
     Left = 96
     Height = 23
     Top = 65
@@ -73,6 +74,7 @@ object fraCadastracontas: TfraCadastracontas
     Width = 50
     MaxValue = 10
     MinValue = 1
+    OnChange = edtDescricaoChange
     TabOrder = 3
     Value = 1
   end

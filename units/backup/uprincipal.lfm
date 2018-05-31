@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 266
+  Left = 245
   Height = 550
-  Top = 156
+  Top = 148
   Width = 800
   Caption = 'Form1'
   ClientHeight = 550
@@ -28,10 +28,10 @@ object Form1: TForm1
         Height = 470
         Top = 8
         Width = 796
-        ActivePage = pageClienteTab_Contas
+        ActivePage = pageClienteTab_Lista
         Align = alCustom
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         OnChange = pageclienteChange
         object pageClienteTab_Lista: TTabSheet
@@ -49,35 +49,79 @@ object Form1: TForm1
               Width = 788
             end
             inherited dtsGrid: TDataSource
+              AutoEdit = False
               DataSet = qryCliente
             end
           end
         end
         object pageClientetTab_Formulario: TTabSheet
           Caption = 'Formulario'
-          ClientHeight = 332
-          ClientWidth = 711
-          object Button1: TButton
-            Left = 16
-            Height = 25
-            Top = 224
-            Width = 75
-            Caption = 'Button1'
-            OnClick = Button1Click
+          ClientHeight = 442
+          ClientWidth = 788
+          object Panel2: TPanel
+            Left = 0
+            Height = 184
+            Top = 1
+            Width = 600
+            Align = alCustom
+            ClientHeight = 184
+            ClientWidth = 600
+            Color = clAqua
+            ParentColor = False
             TabOrder = 0
+            inline fraCliente1: TfraCliente
+            end
           end
-          object Button2: TButton
-            Left = 424
-            Height = 25
-            Top = 208
-            Width = 75
-            Caption = 'Button2'
-            OnClick = Button2Click
+          object Panel1: TPanel
+            Left = 0
+            Height = 104
+            Top = 185
+            Width = 600
+            ClientHeight = 104
+            ClientWidth = 600
+            Color = clMoneyGreen
+            ParentColor = False
             TabOrder = 1
+            inline fraCadastracontas1: TfraCadastracontas
+              Left = 3
+              object DateTimePicker1: TDateTimePicker[2]
+                Left = 96
+                Height = 23
+                Top = 65
+                Width = 83
+                CenturyFrom = 1941
+                MaxDate = 2958465
+                MinDate = -53780
+                TabOrder = 2
+                TrailingSeparator = False
+                TextForNullDate = 'NULL'
+                LeadingZeros = True
+                Kind = dtkDate
+                TimeFormat = tf24
+                TimeDisplay = tdHMS
+                DateMode = dmComboBox
+                Date = 43239
+                Time = 0.775269282406953
+                UseDefaultSeparators = True
+                HideDateTimeParts = []
+                MonthNames = 'Long'
+              end
+            end
           end
-          inline fraCliente1: TfraCliente
-            Top = 8
+          object Panel3: TPanel
+            Left = 0
+            Height = 107
+            Top = 290
+            Width = 600
+            ClientHeight = 107
+            ClientWidth = 600
+            Color = clSilver
+            ParentColor = False
             TabOrder = 2
+            inline fraCadCheque1: TfraCadCheque
+              Left = 3
+              Top = 4
+            end
           end
         end
         object pageClienteTab_Contas: TTabSheet
@@ -93,6 +137,10 @@ object Form1: TForm1
             inherited DBGrid1: TDBGrid
               Height = 394
               Width = 788
+            end
+            inherited dtsGrid: TDataSource
+              AutoEdit = False
+              DataSet = qryContasCli
             end
           end
         end
@@ -327,6 +375,9 @@ object Form1: TForm1
         inherited DBGrid1: TDBGrid
           Height = 474
           Width = 792
+        end
+        inherited dtsGrid: TDataSource
+          DataSet = qryContas
         end
       end
     end
@@ -971,5 +1022,153 @@ object Form1: TForm1
     Options = []
     left = 88
     top = 264
+  end
+  object qryContasCli: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'CLIENTE_CODIGO_CLIENTE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 200
+      end    
+      item
+        Name = 'VALOR'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'VALORPAGO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end    
+      item
+        Name = 'VENCIMENTO'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'QUITACAO'
+        DataType = ftDate
+        Precision = -1
+      end>
+    Active = True
+    Database = base
+    Transaction = trContascli
+    SQL.Strings = (
+      'select * from contas where contas.cliente_codigo_cliente = :CodCliente'
+    )
+    Options = []
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'CodCliente'
+        ParamType = ptInput
+      end>
+    left = 24
+    top = 404
+    object qryContasCLIENTE_CODIGO_CLIENTE1: TLongintField
+      FieldKind = fkData
+      FieldName = 'CLIENTE_CODIGO_CLIENTE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Visible = False
+    end
+    object qryContasCODIGO1: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Visible = False
+    end
+    object qryContasDESCRICAO1: TStringField
+      DisplayLabel = 'Descrição'
+      DisplayWidth = 50
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object qryContasVALOR1: TBCDField
+      DisplayLabel = 'Valor'
+      DisplayWidth = 8
+      FieldKind = fkData
+      FieldName = 'VALOR'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryContasVALORPAGO1: TBCDField
+      DisplayLabel = 'Valor Pago'
+      DisplayWidth = 8
+      FieldKind = fkData
+      FieldName = 'VALORPAGO'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+      Size = 2
+    end
+    object qryContasVENCIMENTO1: TDateField
+      DisplayLabel = 'Vencimento'
+      FieldKind = fkData
+      FieldName = 'VENCIMENTO'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryContasQUITACAO1: TDateField
+      DisplayLabel = 'Quitação'
+      FieldKind = fkData
+      FieldName = 'QUITACAO'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object trContascli: TSQLTransaction
+    Active = True
+    Database = base
+    Options = []
+    left = 88
+    top = 404
   end
 end

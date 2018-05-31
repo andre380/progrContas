@@ -22,9 +22,10 @@ object fraCadastracontas: TfraCadastracontas
     EditLabel.Height = 15
     EditLabel.Top = 6
     EditLabel.Width = 544
-    EditLabel.Caption = 'Descricao'
+    EditLabel.Caption = 'Descricao da Conta'
     EditLabel.ParentColor = False
     TabOrder = 0
+    OnChange = edtDescricaoChange
   end
   object edtValor: TLabeledEdit
     Left = 4
@@ -42,9 +43,9 @@ object fraCadastracontas: TfraCadastracontas
     EditLabel.Caption = 'edtValor'
     EditLabel.ParentColor = False
     TabOrder = 1
-    Text = 'edtValor'
+    OnChange = edtDescricaoChange
   end
-  object DateTimePicker1: TDateTimePicker
+  object edtVencimento: TDateTimePicker
     Left = 96
     Height = 23
     Top = 65
@@ -73,6 +74,7 @@ object fraCadastracontas: TfraCadastracontas
     Width = 50
     MaxValue = 10
     MinValue = 1
+    OnChange = edtDescricaoChange
     TabOrder = 3
     Value = 1
   end
@@ -91,13 +93,5 @@ object fraCadastracontas: TfraCadastracontas
     Width = 63
     Caption = 'vencimento'
     ParentColor = False
-  end
-  object btnGerar: TButton
-    Left = 278
-    Height = 30
-    Top = 57
-    Width = 42
-    Caption = 'Gerar'
-    TabOrder = 4
   end
 end
