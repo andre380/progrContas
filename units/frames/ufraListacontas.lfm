@@ -1,4 +1,4 @@
-object Frame1: TFrame1
+object fraListaContas: TfraListaContas
   Left = 0
   Height = 321
   Top = 0
@@ -17,6 +17,7 @@ object Frame1: TFrame1
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clWindow
     Columns = <>
+    DataSource = dtsGrid
     TabOrder = 0
   end
   object edtFiltro: TLabeledEdit
@@ -131,5 +132,9 @@ object Frame1: TFrame1
     Caption = 'Imprime'
     OnClick = btnImprimeClick
     TabOrder = 8
+  end
+  object dtsGrid: TDataSource
+    left = 288
+    top = 56
   end
 end

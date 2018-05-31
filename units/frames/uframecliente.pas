@@ -33,8 +33,12 @@ type
     { private declarations }
   public
     { public declarations }
+    nome,endereco,cpf,telefone1,telefone2,email,rg,cidade,bairro:string;
+    datanascimento,datacadastro:TDate;
+    perfil:integer;
     function valida:boolean;
     procedure limpa;
+    procedure carrega;
   end;
 
 implementation
@@ -118,6 +122,20 @@ begin
   end
   else
     edtNome.EditLabel.Font.Color:=clBlack;
+  if Result then
+  begin
+    nome  := edtNome.Text;
+    cpf  := edtCPF.Text;
+    rg  := edtrg.Text;
+    datanascimento  := edtNascimento.Date;
+    endereco  := edtEndereco.Text;
+    bairro  := edtBairro.Text;
+    cidade  := edtCidade.Text;
+    email  := edtEmail.Text;
+    datacadastro  := edtDataCadastro.Date;
+    telefone1  := edtTelefone1.Text;
+    telefone2  := edtTelefone2.Text;
+  end;
 end;
 
 procedure TfraCliente.limpa;
@@ -143,6 +161,23 @@ begin
     edtDataCadastro.Date:=Date;
     edtTelefone1.Text:='';
     edtTelefone2.Text:='';
+    spnPerfil.Value:=1;
+end;
+
+procedure TfraCliente.carrega;
+begin
+  edtNome.Text         := nome;
+  edtCPF.Text          := cpf;
+  edtrg.Text           := rg;
+  edtNascimento.Date   := datanascimento;
+  edtEndereco.Text     := endereco;
+  edtBairro.Text       := bairro;
+  edtCidade.Text       := cidade;
+  edtEmail.Text        := email;
+  edtDataCadastro.Date := datacadastro;
+  edtTelefone1.Text    := telefone1;
+  edtTelefone2.Text    := telefone2;
+  perfil               := spnPerfil.Value;
 end;
 
 end.

@@ -5,43 +5,57 @@ unit ufraListaClientes;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, ExtCtrls, Buttons, DBGrids,sqldb;
+  Classes, SysUtils, FileUtil, Forms, Controls, ExtCtrls, Buttons, DBGrids, Dialogs,
+  sqldb, db;
 
 type
 
-  { TFrame2 }
+  { TfraLisClientes }
 
-  TFrame2 = class(TFrame)
+  TfraLisClientes = class(TFrame)
+  private
+    Fqry: TSQLQuery;
+    procedure Setqry(AValue: TSQLQuery);
+  published
     btnLimpaFiltro: TSpeedButton;
     DBGrid1: TDBGrid;
+    dtsGrid: TDataSource;
     edtFiltro: TLabeledEdit;
     procedure btnLimpaFiltroClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure edtFiltroChange(Sender: TObject);
+    property qry :TSQLQuery read Fqry write Setqry;
   private
     { private declarations }
   public
     { public declarations }
-    qry:TSQLQuery;
+
   end;
 
 implementation
 
 {$R *.lfm}
 
-{ TFrame2 }
+{ TfraLisClientes }
 
-procedure TFrame2.btnLimpaFiltroClick(Sender: TObject);
+procedure TfraLisClientes.Setqry(AValue: TSQLQuery);
+begin
+  if Fqry=AValue then Exit;
+  dtsGrid.DataSet:= AValue;
+  Fqry:=AValue;
+end;
+
+procedure TfraLisClientes.btnLimpaFiltroClick(Sender: TObject);
 begin
   edtFiltro.Clear;
 end;
 
-procedure TFrame2.DBGrid1DblClick(Sender: TObject);
+procedure TfraLisClientes.DBGrid1DblClick(Sender: TObject);
 begin
-  DBGrid1.OnDblClick:=;
+  //
 end;
 
-procedure TFrame2.edtFiltroChange(Sender: TObject);
+procedure TfraLisClientes.edtFiltroChange(Sender: TObject);
 begin
   if Assigned(qry) then
   begin

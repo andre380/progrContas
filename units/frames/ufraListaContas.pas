@@ -6,13 +6,17 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, DateTimePicker, Forms, Controls, ExtCtrls,
-  DBGrids, Buttons, StdCtrls,dialogs,sqldb;
+  DBGrids, Buttons, StdCtrls,dialogs,sqldb, db;
 
 type
 
-  { TFrame1 }
+  { TfraListaContas }
 
-  TFrame1 = class(TFrame)
+  TfraListaContas = class(TFrame)
+  private
+    Fqry: TSQLQuery;
+    procedure Setqry(AValue: TSQLQuery);
+  published
     btnPagar: TButton;
     btnImprime: TButton;
     chkAntigas: TCheckBox;
@@ -21,33 +25,34 @@ type
     chkVencidas: TCheckBox;
     DateTimePicker1: TDateTimePicker;
     DBGrid1: TDBGrid;
+    dtsGrid: TDataSource;
     edtFiltro: TLabeledEdit;
     btnLimpaFiltro: TSpeedButton;
     procedure btnImprimeClick(Sender: TObject);
     procedure btnLimpaFiltroClick(Sender: TObject);
     procedure btnPagarClick(Sender: TObject);
     procedure chkAvencerChange(Sender: TObject);
+    property qry :TSQLQuery read Fqry write Setqry;
   private
     { private declarations }
   public
     { public declarations }
-    qry:TSQLQuery;
   end;
 
 implementation
 
 {$R *.lfm}
 
-{ TFrame1 }
+{ TfraListaContas }
 
-procedure TFrame1.btnPagarClick(Sender: TObject);
+procedure TfraListaContas.btnPagarClick(Sender: TObject);
 var
   valor: String;
 begin
   valor:=InputBox('Pagamento','Valor pago','20,00');
 end;
 
-procedure TFrame1.chkAvencerChange(Sender: TObject);
+procedure TfraListaContas.chkAvencerChange(Sender: TObject);
 begin
   if Assigned(qry) then
   begin
@@ -57,12 +62,19 @@ begin
   ShowMessage('Erro: qry não definida');
 end;
 
-procedure TFrame1.btnLimpaFiltroClick(Sender: TObject);
+procedure TfraListaContas.btnLimpaFiltroClick(Sender: TObject);
 begin
   edtFiltro.Clear;
 end;
 
-procedure TFrame1.btnImprimeClick(Sender: TObject);
+procedure TfraListaContas.Setqry(AValue: TSQLQuery);
+begin
+  if Fqry=AValue then Exit;
+  dtsGrid.DataSet:= AValue;
+  Fqry:=AValue;
+end;
+
+procedure TfraListaContas.btnImprimeClick(Sender: TObject);
 begin
   if Assigned(qry) then
   begin

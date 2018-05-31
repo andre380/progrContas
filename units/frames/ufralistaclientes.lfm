@@ -1,4 +1,4 @@
-object Frame2: TFrame2
+object fraLisClientes: TfraLisClientes
   Left = 0
   Height = 356
   Top = 0
@@ -53,7 +53,12 @@ object Frame2: TFrame2
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clWindow
     Columns = <>
+    DataSource = dtsGrid
     TabOrder = 1
     OnDblClick = DBGrid1DblClick
+  end
+  object dtsGrid: TDataSource
+    left = 316
+    top = 4
   end
 end
