@@ -10,8 +10,8 @@ object fraListaContas: TfraListaContas
   DesignTop = 244
   object DBGrid1: TDBGrid
     Left = 0
-    Height = 273
-    Top = 48
+    Height = 266
+    Top = 55
     Width = 642
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -23,7 +23,7 @@ object fraListaContas: TfraListaContas
   object edtFiltro: TLabeledEdit
     Left = 0
     Height = 23
-    Top = 16
+    Top = 23
     Width = 216
     EditLabel.AnchorSideLeft.Control = edtFiltro
     EditLabel.AnchorSideRight.Control = edtFiltro
@@ -31,17 +31,18 @@ object fraListaContas: TfraListaContas
     EditLabel.AnchorSideBottom.Control = edtFiltro
     EditLabel.Left = 0
     EditLabel.Height = 15
-    EditLabel.Top = -2
+    EditLabel.Top = 5
     EditLabel.Width = 216
     EditLabel.Caption = 'buscar por nome ou cpf'
     EditLabel.ParentColor = False
     TabOrder = 1
+    OnChange = edtFiltroChange
   end
   object btnLimpaFiltro: TSpeedButton
     Left = 216
-    Height = 23
+    Height = 21
     Hint = 'Limpar o filtro'
-    Top = 16
+    Top = 23
     Width = 19
     Caption = 'x'
     Font.CharSet = ANSI_CHARSET
@@ -55,62 +56,24 @@ object fraListaContas: TfraListaContas
     ParentFont = False
     ParentShowHint = False
   end
-  object chkVencidas: TCheckBox
-    Left = 248
-    Height = 19
-    Top = 0
-    Width = 67
-    Caption = 'Vencidas'
-    OnChange = chkAvencerChange
-    TabOrder = 2
-  end
-  object chkAvencer: TCheckBox
-    Left = 248
-    Height = 19
-    Top = 24
-    Width = 66
-    Caption = 'A vencer'
-    Checked = True
-    OnChange = chkAvencerChange
-    State = cbChecked
-    TabOrder = 3
-  end
-  object chkAntigas: TCheckBox
-    Left = 336
-    Height = 19
-    Top = 0
-    Width = 60
-    Caption = 'Antigas'
-    OnChange = chkAvencerChange
-    TabOrder = 4
-  end
-  object chkPagas: TCheckBox
-    Left = 336
-    Height = 19
-    Top = 24
-    Width = 51
-    Caption = 'Pagas'
-    OnChange = chkAvencerChange
-    TabOrder = 5
-  end
   object btnPagar: TButton
     Left = 400
     Height = 31
-    Top = 8
+    Top = 10
     Width = 48
     Caption = 'Pagar'
     OnClick = btnPagarClick
-    TabOrder = 6
+    TabOrder = 2
   end
   object DateTimePicker1: TDateTimePicker
-    Left = 456
+    Left = 448
     Height = 23
-    Top = 12
+    Top = 14
     Width = 83
     CenturyFrom = 1941
     MaxDate = 2958465
     MinDate = -53780
-    TabOrder = 7
+    TabOrder = 3
     TrailingSeparator = False
     TextForNullDate = 'NULL'
     LeadingZeros = True
@@ -125,16 +88,48 @@ object fraListaContas: TfraListaContas
     MonthNames = 'Long'
   end
   object btnImprime: TButton
-    Left = 568
+    Left = 571
     Height = 31
-    Top = 8
+    Top = 10
     Width = 56
     Caption = 'Imprime'
     OnClick = btnImprimeClick
-    TabOrder = 8
+    TabOrder = 4
+  end
+  object rgFiltros: TRadioGroup
+    Left = 240
+    Height = 73
+    Top = -18
+    Width = 153
+    AutoFill = True
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 53
+    ClientWidth = 149
+    Columns = 2
+    ItemIndex = 0
+    Items.Strings = (
+      'a  vencer'
+      'vencidas'
+      'antigas'
+      'Pagas'
+      'todas'
+    )
+    OnClick = rgFiltrosClick
+    TabOrder = 5
   end
   object dtsGrid: TDataSource
     left = 288
     top = 56
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    left = 167
+    top = 71
   end
 end

@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, DBGrids,
   StdCtrls, ComCtrls, ExtCtrls, Grids, Spin, Buttons, uframeCliente,
   ufraListacontas, ufraCadastracontas, ufraListaClientes, ufraListaCheques,
-  ufraCadCheque, DateTimePicker, Types, IBConnection, sqldb, db,
+  ufraCadCheque, DateTimePicker, Types, IBConnection, sqldb, db,variants,
   dateutils,
 
   uqryDinamicaLZ,ufuncoes;
@@ -19,6 +19,7 @@ type
 
   TForm1 = class(TForm)
     btnApagar: TBitBtn;
+    btnAtualizar: TBitBtn;
     btnNovo: TBitBtn;
     btnAlterar: TBitBtn;
     btnCancelar: TBitBtn;
@@ -95,19 +96,24 @@ type
     pageClienteTab_Contas: TTabSheet;
     procedure btnAlterarClick(Sender: TObject);
     procedure btnApagarClick(Sender: TObject);
+    procedure btnAtualizarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pageclienteChange(Sender: TObject);
+    procedure pagePrincipalChange(Sender: TObject);
+    procedure PgPrincipalTabClientesContextPopup(Sender: TObject;
+      MousePos: TPoint; var Handled: Boolean);
     procedure qryClienteAfterScroll(DataSet: TDataSet);
 
     procedure ControlaBotoes(editando:Boolean);
     function salvacliente:Boolean;
     function criaConta:boolean;
+    function SalvaCheque :Boolean;
     procedure carregaCliente;
     procedure atualizaclientes;
+    procedure atualizacontas;
   private
     { private declarations }
     edCliente,
@@ -116,7 +122,7 @@ type
     inCheque,
     edConta,
     inConta:Boolean;
-    codcliente:integer;
+    codcliente,codconta:integer;
   public
     { public declarations }
   end;
@@ -130,17 +136,14 @@ implementation
 
 { TForm1 }
 
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-  fraCliente1.valida;
-end;
-
 procedure TForm1.btnNovoClick(Sender: TObject);
 begin
   if pagePrincipal.ActivePageIndex=0 then
   begin
     pagecliente.ActivePageIndex:=1;
     fraCliente1.limpa;
+    fraCadastracontas1.limpa;
+    fraCadCheque1.limpa;
     inCliente:=true;
   end;
   ControlaBotoes(true);
@@ -148,9 +151,10 @@ end;
 
 procedure TForm1.btnSalvarClick(Sender: TObject);
 var
-  contaOk: Boolean;
+  contaOk, chequeOk: Boolean;
 begin
   contaok:=true;
+  chequeOk:=True;
   if inCliente or edCliente then
   begin
     if fraCliente1.valida then
@@ -159,17 +163,25 @@ begin
       begin
         contaOk:=fraCadastracontas1.valida;
       end;
-      if contaok and confirma('salvar as alterações no cliente')  then
+      if fraCadCheque1.alterou then
+      begin
+        chequeOk:=fraCadCheque1.valida;
+      end;
+      if contaok and chequeOk and confirma('salvar as alterações no cliente')  then
       begin
         salvacliente;
         if contaok then
-        criaConta;
+          criaConta;
+        if chequeOk then
+          salvacheque;
         inCliente:=false;
         ControlaBotoes(False);
       end;
     end;
   end;
-
+  atualizaclientes;
+  atualizacontas;
+  //atualisacheques;
 end;
 
 procedure TForm1.btnAlterarClick(Sender: TObject);
@@ -179,6 +191,8 @@ begin
     pagecliente.ActivePageIndex:=1;
     fraCliente1.limpa;
     fraCliente1.carrega;
+    fraCadastracontas1.limpa;
+    fraCadCheque1.limpa;
     edCliente:=true;
   end;
   ControlaBotoes(true);
@@ -201,6 +215,12 @@ begin
         atualizaclientes;
       end;
   end;
+end;
+
+procedure TForm1.btnAtualizarClick(Sender: TObject);
+begin
+  atualizaclientes;
+  atualizacontas;
 end;
 
 procedure TForm1.btnCancelarClick(Sender: TObject);
@@ -245,6 +265,32 @@ begin
   begin
     carregaCliente;
   end;
+  if  pagecliente.ActivePageIndex=2 then
+  begin
+    pageClienteTab_Contas.Caption:= 'Contas de '+Copy(qryClienteNOME.AsString,1,50);
+  end
+  else
+    pageClienteTab_Contas.Caption:= 'Contas do cliente';
+  if  pagecliente.ActivePageIndex=3 then
+  begin
+    pageclienteTab_Cheques.Caption:= 'Cheques de '+copy(qryClienteNOME.AsString,1,50);
+  end
+  else
+    pageclienteTab_Cheques.Caption:= 'Cheques do cliente';
+end;
+
+procedure TForm1.pagePrincipalChange(Sender: TObject);
+begin
+  if pagePrincipal.ActivePage = pgPrincipalTabContas then
+  begin
+    atualizacontas;
+  end;
+end;
+
+procedure TForm1.PgPrincipalTabClientesContextPopup(Sender: TObject;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+
 end;
 
 procedure TForm1.qryClienteAfterScroll(DataSet: TDataSet);
@@ -348,6 +394,11 @@ begin
       //atualizacontas;
 end;
 
+function TForm1.SalvaCheque: Boolean;
+begin
+  //
+end;
+
 procedure TForm1.carregaCliente;
 begin
   fraCliente1.nome           := qryClienteNOME.AsString;
@@ -369,6 +420,14 @@ procedure TForm1.atualizaclientes;
 begin
   trcliente.Active:=false;
   qrycliente.Open;
+  qryCliente.Locate('codigo',codcliente,[]);
+end;
+
+procedure TForm1.atualizacontas;
+begin
+  qryContas.Transaction.Active:=false;
+  qryContas.Open;
+  qrycontas.Locate('cliente_codigo_cliente;codigo',vararrayof([codcliente,codconta]),[]);
 end;
 
 end.

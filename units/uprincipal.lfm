@@ -1,5 +1,5 @@
 object Form1: TForm1
-  Left = 245
+  Left = 263
   Height = 550
   Top = 148
   Width = 800
@@ -19,19 +19,21 @@ object Form1: TForm1
     Anchors = [akLeft, akRight, akBottom]
     TabIndex = 0
     TabOrder = 0
+    OnChange = pagePrincipalChange
     object PgPrincipalTabClientes: TTabSheet
       Caption = 'Clientes'
       ClientHeight = 522
       ClientWidth = 792
+      OnContextPopup = PgPrincipalTabClientesContextPopup
       object pagecliente: TPageControl
         Left = 0
         Height = 470
         Top = 8
         Width = 796
-        ActivePage = pageClienteTab_Lista
+        ActivePage = pageClientetTab_Formulario
         Align = alCustom
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         OnChange = pageclienteChange
         object pageClienteTab_Lista: TTabSheet
@@ -55,7 +57,7 @@ object Form1: TForm1
           end
         end
         object pageClientetTab_Formulario: TTabSheet
-          Caption = 'Formulario'
+          Caption = 'Tela de cadastro'
           ClientHeight = 442
           ClientWidth = 788
           object Panel2: TPanel
@@ -84,28 +86,6 @@ object Form1: TForm1
             TabOrder = 1
             inline fraCadastracontas1: TfraCadastracontas
               Left = 3
-              object DateTimePicker1: TDateTimePicker[2]
-                Left = 96
-                Height = 23
-                Top = 65
-                Width = 83
-                CenturyFrom = 1941
-                MaxDate = 2958465
-                MinDate = -53780
-                TabOrder = 2
-                TrailingSeparator = False
-                TextForNullDate = 'NULL'
-                LeadingZeros = True
-                Kind = dtkDate
-                TimeFormat = tf24
-                TimeDisplay = tdHMS
-                DateMode = dmComboBox
-                Date = 43239
-                Time = 0.775269282406953
-                UseDefaultSeparators = True
-                HideDateTimeParts = []
-                MonthNames = 'Long'
-              end
             end
           end
           object Panel3: TPanel
@@ -121,11 +101,18 @@ object Form1: TForm1
             inline fraCadCheque1: TfraCadCheque
               Left = 3
               Top = 4
+              inherited edtVencimento: TDateTimePicker
+                Date = 43239
+                Time = 0.866826863428287
+              end
+              inherited edtValor: TLabeledEdit
+                OnChange = nil
+              end
             end
           end
         end
         object pageClienteTab_Contas: TTabSheet
-          Caption = 'Contas'
+          Caption = 'Contas do cliente'
           ClientHeight = 442
           ClientWidth = 788
           inline fraListaContas2: TfraListaContas
@@ -142,21 +129,24 @@ object Form1: TForm1
               AutoEdit = False
               DataSet = qryContasCli
             end
+            inherited Timer1: TTimer
+              OnTimer = nil
+            end
           end
         end
         object pageclienteTab_Cheques: TTabSheet
-          Caption = 'Cheques'
-          ClientHeight = 332
-          ClientWidth = 711
+          Caption = 'Cheques do cliente'
+          ClientHeight = 442
+          ClientWidth = 788
           inline frListaCheques1: TfrListaCheques
-            Height = 332
-            Width = 711
+            Height = 442
+            Width = 788
             Align = alClient
-            ClientHeight = 332
-            ClientWidth = 711
+            ClientHeight = 442
+            ClientWidth = 788
             inherited DBGrid1: TDBGrid
-              Height = 284
-              Width = 711
+              Height = 394
+              Width = 788
             end
           end
         end
@@ -358,12 +348,67 @@ object Form1: TForm1
         Width = 54
         Anchors = [akLeft, akBottom]
         Caption = 'Apagar'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -15
+        Font.Name = 'Candara'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
         OnClick = btnApagarClick
+        ParentFont = False
         TabOrder = 5
+      end
+      object btnAtualizar: TBitBtn
+        Left = 272
+        Height = 40
+        Top = 480
+        Width = 54
+        Anchors = [akLeft, akBottom]
+        Caption = 'Atualizar'
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C5DFEF00B6B6B6FFB6B6B6FFBDDA
+          ED00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00DCEDF60078B7DC00D89067FFDFDFDEFFC9C9C8FFA5A5
+          A5FF6BADD700D5E7F300FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00EEF6FB0095C9E400B6B6B6FFD89067FFD89067FFEBEBEBFFDFDFDEFFDFDF
+          DEFFC9C9C8FFA5A5A5FF85BBDE00E7F2F900FFFFFF00FFFFFF00FAFDFE00B1D9
+          EC00C9C9C8FFDFDFDEFFDE9F78FFE1A37BFFE1A37BFFB6715AFFD28358FFD283
+          58FFE1A37BFFDFDFDEFFA5A5A5FFA5A5A5FFA1CAE500F6FAFD0073BDDE00C9C9
+          C8FFEBEBEBFFE1A37BFFE1A37BFFE3AA83FFE3AA83FFE3AA83FFE3AA83FFE3AA
+          83FFE1A37BFFD89067FFDFDFDEFFC9C9C8FFA5A5A5FF58A1D200B6B6B6FFF3F3
+          F3FFEBEBEBFFEBEBEBFFDE9F78FFE1A37BFFE1A37BFFD28358FFD28358FFD890
+          67FFD89067FFE1A37BFFDE9F78FFC9C9C8FFD2D1D1FFA5A5A5FFB6B6B6FFF3F3
+          F3FFF3F3F3FFEBEBEBFFEBEBEBFFDE9F78FFE1A37BFFEBEBEBFFC9C9C8FFD890
+          67FFD28358FFD28358FFE1A37BFFB6B6B6FFD2D1D1FFA5A5A5FFB6B6B6FFE2F6
+          FCFFF3F3F3FFF3F3F3FFEBEBEBFFEBEBEBFFE3AA83FFD2D1D1FFC9C9C8FFC9C9
+          C8FFC9C9C8FFC9C9C8FFC9C9C8FFB6B6B6FFDFDFDEFFA5A5A5FFB6B6B6FFF3F3
+          F3FFF3F3F3FFEBEBEBFFEBEBEBFFDFDFDEFFDFDFDEFFC9C9C8FFE3AA83FFEBEB
+          EBFFC9C9C8FFB6B6B6FFC9C9C8FFC9C9C8FFDFDFDEFFA5A5A5FFB6B6B6FFF3F3
+          F3FFE3AA83FFD89067FFD89067FFE3AA83FFEBEBEBFFC9C9C8FFDE9F78FFDE9F
+          78FFEBEBEBFFDFDFDEFFC9C9C8FFB6B6B6FFDFDFDEFFA5A5A5FFB6B6B6FFF3F3
+          F3FFE5AF86FFE3AA83FFE5AF86FFDE9F78FFD28358FFD28358FFDE9F78FFDE9F
+          78FFDE9F78FFEBEBEBFFDFDFDEFFEBEBEBFFEBEBEBFFA5A5A5FF91D2E700C9C9
+          C8FFEBEBEBFFE1A67DFFE3AA83FFE5AF86FFE5AF86FFE5AF86FFE5AF86FFE5AF
+          86FFD89067FFD89067FFEBEBEBFFC9C9C8FFB6B6B6FF7ABADD00FFFFFF00CFEB
+          F500DFDFDEFFDFDFDEFFE5AF86FFDE9F78FFD89067FFD89067FFDE9F78FFDE9F
+          78FFE3AA83FFEBEBEBFFB6B6B6FFB6B6B6FFC2E1F000FFFFFF00FFFFFF00FFFF
+          FF00FCFEFE00B9E2F000DFDFDEFFEBEBEBFFE6F8FCFFE3F6FEFFE3AA83FFE5AF
+          86FFEBEBEBFFB6B6B6FFADD8EB00F8FCFD00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00F0F9FC00A3D8EB00C9C9C8FFEBEBEBFFE5AF86FFC9C9
+          C8FF98D0E700ECF6FB00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00E1F2F800DFDFDEFFDFDFDEFFDCEF
+          F700FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+        }
+        Layout = blGlyphTop
+        OnClick = btnAtualizarClick
+        TabOrder = 6
       end
     end
     object pgPrincipalTabContas: TTabSheet
-      Caption = 'Contas'
+      Caption = 'Todas as Contas'
       ClientHeight = 522
       ClientWidth = 792
       inline fraListaContas1: TfraListaContas
@@ -379,21 +424,24 @@ object Form1: TForm1
         inherited dtsGrid: TDataSource
           DataSet = qryContas
         end
+        inherited Timer1: TTimer
+          OnTimer = nil
+        end
       end
     end
     object pagePrincipalTabCheques: TTabSheet
-      Caption = 'Cheques'
-      ClientHeight = 412
-      ClientWidth = 715
+      Caption = 'Todos os Cheques'
+      ClientHeight = 522
+      ClientWidth = 792
       inline frListaCheques2: TfrListaCheques
-        Height = 412
-        Width = 715
+        Height = 522
+        Width = 792
         Align = alClient
-        ClientHeight = 412
-        ClientWidth = 715
+        ClientHeight = 522
+        ClientWidth = 792
         inherited DBGrid1: TDBGrid
-          Height = 364
-          Width = 715
+          Height = 474
+          Width = 792
         end
       end
     end

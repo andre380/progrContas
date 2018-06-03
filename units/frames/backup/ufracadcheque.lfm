@@ -24,6 +24,7 @@ object fraCadCheque: TfraCadCheque
     EditLabel.Caption = 'Dono cheque'
     EditLabel.ParentColor = False
     TabOrder = 0
+    OnChange = edtValorChange
   end
   object edtVencimento: TDateTimePicker
     Left = 5
@@ -41,8 +42,8 @@ object fraCadCheque: TfraCadCheque
     TimeFormat = tf24
     TimeDisplay = tdHMS
     DateMode = dmComboBox
-    Date = 43239
-    Time = 0.866826863428287
+    Date = 1.7E308
+    Time = 1.7E308
     UseDefaultSeparators = True
     HideDateTimeParts = []
     MonthNames = 'Long'
@@ -71,6 +72,7 @@ object fraCadCheque: TfraCadCheque
     EditLabel.Caption = 'Valor'
     EditLabel.ParentColor = False
     TabOrder = 2
+    OnChange = edtValorChange
   end
   object edtNumeroCheque: TLabeledEdit
     Left = 79
@@ -88,6 +90,7 @@ object fraCadCheque: TfraCadCheque
     EditLabel.Caption = 'NumeroCheque'
     EditLabel.ParentColor = False
     TabOrder = 3
+    OnChange = edtValorChange
   end
   object edtBancoOrigem: TLabeledEdit
     Left = 196
@@ -105,6 +108,7 @@ object fraCadCheque: TfraCadCheque
     EditLabel.Caption = 'BancoOrigem'
     EditLabel.ParentColor = False
     TabOrder = 4
+    OnChange = edtValorChange
   end
   object edtBancoDeposito: TLabeledEdit
     Left = 296
@@ -123,28 +127,20 @@ object fraCadCheque: TfraCadCheque
     EditLabel.ParentColor = False
     TabOrder = 5
   end
-  object CheckBox1: TCheckBox
+  object chkCompensado: TCheckBox
     Left = 408
     Height = 19
-    Top = 68
+    Top = 64
     Width = 91
     Caption = 'Compensado'
     TabOrder = 6
   end
-  object CheckBox2: TCheckBox
-    Left = 408
-    Height = 19
-    Top = 48
-    Width = 80
-    Caption = 'Depositado'
-    TabOrder = 7
-  end
   object chkDevolvido: TCheckBox
-    Left = 512
+    Left = 504
     Height = 19
-    Top = 48
+    Top = 64
     Width = 73
     Caption = 'Devolvido'
-    TabOrder = 8
+    TabOrder = 7
   end
 end

@@ -318,7 +318,7 @@ end;
 
 function Tqrydinamica.strdate(value: TDateTime; mascara: string): string;
 begin
-  FormatDateTime(mascara,value,[]);
+  result:=FormatDateTime(mascara,value,[]);
 end;
 
 function Tqrydinamica.eof: Boolean;
