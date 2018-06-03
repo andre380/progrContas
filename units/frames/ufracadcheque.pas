@@ -32,6 +32,7 @@ type
     BancoDeposito, BancoOrigem, NumeroCheque, donocheque: String;
     Vencimento: TDate;
     compensado, devolvido: Boolean;
+    valor: Currency;
 
     procedure limpa;
     function valida:Boolean;
@@ -79,7 +80,7 @@ begin
   end
   else
     edtNumeroCheque.EditLabel.font.Color:=clBlack;
-  if Length(edtValor.Text) < 2 then
+  if StrToCurrDef(edtValor.Text,0) = 0 then
   begin
     Result:=false;
     edtValor.SetFocus;
@@ -113,6 +114,7 @@ begin
    Vencimento   := edtVencimento.Date;
    compensado   := chkCompensado.Checked;
    devolvido    := chkDevolvido.Checked;
+   valor        := StrToCurrDef(edtValor.Text,0);
   end;
 end;
 

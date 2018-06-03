@@ -24,6 +24,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Nome'
     EditLabel.ParentColor = False
     TabOrder = 0
+    OnChange = edtNomeChange
   end
   object edtEndereco: TLabeledEdit
     Left = 8
@@ -41,6 +42,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Endereco'
     EditLabel.ParentColor = False
     TabOrder = 4
+    OnChange = edtNomeChange
   end
   object edtCPF: TLabeledEdit
     Left = 261
@@ -58,6 +60,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'CPF'
     EditLabel.ParentColor = False
     TabOrder = 1
+    OnChange = edtNomeChange
   end
   object edtTelefone1: TLabeledEdit
     Left = 104
@@ -75,6 +78,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Telefone1'
     EditLabel.ParentColor = False
     TabOrder = 9
+    OnChange = edtNomeChange
   end
   object edtTelefone2: TLabeledEdit
     Left = 224
@@ -92,6 +96,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Telefone2'
     EditLabel.ParentColor = False
     TabOrder = 10
+    OnChange = edtNomeChange
   end
   object edtDataCadastro: TDateTimePicker
     Left = 8
@@ -114,6 +119,7 @@ object fraCliente: TfraCliente
     UseDefaultSeparators = True
     HideDateTimeParts = []
     MonthNames = 'Long'
+    OnChange = edtNomeChange
   end
   object spnPerfil: TSpinEdit
     Left = 400
@@ -122,6 +128,7 @@ object fraCliente: TfraCliente
     Width = 50
     MaxValue = 10
     MinValue = 1
+    OnChange = edtNomeChange
     TabOrder = 11
     Value = 1
   end
@@ -157,6 +164,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Cidade'
     EditLabel.ParentColor = False
     TabOrder = 6
+    OnChange = edtNomeChange
   end
   object edtBairro: TLabeledEdit
     Left = 352
@@ -174,6 +182,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Bairro'
     EditLabel.ParentColor = False
     TabOrder = 5
+    OnChange = edtNomeChange
   end
   object lblSituacao: TLabel
     Left = 493
@@ -199,6 +208,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'Email'
     EditLabel.ParentColor = False
     TabOrder = 7
+    OnChange = edtNomeChange
   end
   object edtRG: TLabeledEdit
     Left = 376
@@ -216,6 +226,7 @@ object fraCliente: TfraCliente
     EditLabel.Caption = 'RG'
     EditLabel.ParentColor = False
     TabOrder = 2
+    OnChange = edtNomeChange
   end
   object edtNascimento: TDateTimePicker
     Left = 509
@@ -238,6 +249,7 @@ object fraCliente: TfraCliente
     UseDefaultSeparators = True
     HideDateTimeParts = []
     MonthNames = 'Long'
+    OnChange = edtNomeChange
   end
   object lblNascimento: TLabel
     Left = 509

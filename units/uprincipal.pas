@@ -151,10 +151,11 @@ end;
 
 procedure TForm1.btnSalvarClick(Sender: TObject);
 var
-  contaOk, chequeOk: Boolean;
+  contaOk, chequeOk, clienteChg: Boolean;
 begin
   contaok:=true;
   chequeOk:=True;
+  clienteChg:=true;
   if inCliente or edCliente then
   begin
     if fraCliente1.valida then
@@ -176,6 +177,7 @@ begin
           salvacheque;
         inCliente:=false;
         ControlaBotoes(False);
+        avisa('Gravação concluida!');
       end;
     end;
   end;
@@ -350,9 +352,10 @@ begin
 
       qryCliente.Post;
       qryCliente.ApplyUpdates;
-      trcliente.Commit;
+      trcliente.CommitRetaining;
 
     end;
+    codcliente:=qryClienteCODIGO.AsInteger;
     result:=true;
     atualizaclientes;
   end;
@@ -395,8 +398,28 @@ begin
 end;
 
 function TForm1.SalvaCheque: Boolean;
+var
+  qry: Tqrydinamica;
+  newcodCheque: integer;
 begin
-  //
+  qry:=Tqrydinamica.create(base);
+  qry.executasql('select max(cheques.codigo) from cheques where cheques.cliente_codigo_cliente = '+q(str(codcliente)));
+  newcodCheque:=qry.campoint('max')+1;
+  qry.sql:= 'INSERT INTO CHEQUES values(:CLIENTE_CODIGO_CLIENTE, :CODIGO, :VALOR, :DATAVENCIMENTO, :NUMERO_CHEQUE, :BANCO_ORIGEM, :DONO_CHEQUE, :BANCO_DEPOSITO, :COMPENSADO, :DEVOLVIDO)';
+  qry.prepare;
+  qry.parambyname('CLIENTE_CODIGO_CLIENTE').AsInteger:=codcliente;
+  qry.parambyname('CODIGO').AsInteger        := newcodCheque;
+  qry.parambyname('VALOR').AsCurrency        := fraCadCheque1.valor;
+  qry.parambyname('BANCO_DEPOSITO').asstring := fraCadCheque1.BancoDeposito;
+  qry.parambyname('BANCO_ORIGEM').asstring   := fraCadCheque1.BancoOrigem;
+  qry.parambyname('NUMERO_CHEQUE').asstring  := fraCadCheque1.NumeroCheque;
+  qry.parambyname('DONO_CHEQUE').asstring    := fraCadCheque1.donocheque;
+  qry.parambyname('DATAVENCIMENTO').AsDate   := fraCadCheque1.Vencimento;
+  qry.parambyname('COMPENSADO').AsBoolean    := fraCadCheque1.compensado;
+  qry.parambyname('DEVOLVIDO').AsBoolean     := fraCadCheque1.devolvido;
+  qry.qry.ExecSQL;
+  qry.commit;
+  qry.Free;
 end;
 
 procedure TForm1.carregaCliente;

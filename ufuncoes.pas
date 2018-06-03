@@ -6,6 +6,7 @@ interface
 
 uses
   Classes, SysUtils,Dialogs;
+  procedure avisa(msg:string);
   function confirma(pergunta:string):boolean;
   function str(value:integer):string;overload;
   function str(value:Currency):string;overload;
@@ -15,6 +16,11 @@ uses
 
 
 implementation
+
+procedure avisa(msg: string);
+begin
+  QuestionDlg('Aviso!',msg,mtInformation,[1],1);
+end;
 
 function confirma(pergunta: string): boolean;
 begin

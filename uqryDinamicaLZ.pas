@@ -290,6 +290,8 @@ end;
 
 function Tqrydinamica.ParamByName(const AParamName: String): TParam;
 begin
+  if not qry.Prepared then
+    prepare;
   result:=qry.ParamByName(AParamName);
 end;
 

@@ -29,6 +29,7 @@ type
     edtBairro: TLabeledEdit;
     lblSituacao: TLabel;
     spnPerfil: TSpinEdit;
+    procedure edtNomeChange(Sender: TObject);
   private
     { private declarations }
   public
@@ -36,6 +37,7 @@ type
     nome,endereco,cpf,telefone1,telefone2,email,rg,cidade,bairro:string;
     datanascimento,datacadastro:TDate;
     perfil:integer;
+    alterou:Boolean;
     function valida:boolean;
     procedure limpa;
     procedure carrega;
@@ -46,6 +48,11 @@ implementation
 {$R *.lfm}
 
 { TfraCliente }
+
+procedure TfraCliente.edtNomeChange(Sender: TObject);
+begin
+  alterou:=true;
+end;
 
 function TfraCliente.valida: boolean;
 begin
@@ -178,6 +185,7 @@ begin
   edtTelefone1.Text    := telefone1;
   edtTelefone2.Text    := telefone2;
   perfil               := spnPerfil.Value;
+  alterou              := false;
 end;
 
 end.

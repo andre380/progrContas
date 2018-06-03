@@ -9,7 +9,7 @@
         <Filename Value="ProgrContas.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos Y="20"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,11 +21,11 @@
         <UnitName Value="uPrincipal"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="385"/>
-        <CursorPos X="126" Y="406"/>
-        <UsageCount Value="86"/>
+        <TopLine Value="397"/>
+        <CursorPos Y="421"/>
+        <UsageCount Value="89"/>
         <Bookmarks Count="1">
-          <Item0 X="3" Y="298" ID="1"/>
+          <Item0 X="3" Y="300" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -38,7 +38,7 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="25" Y="11"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="89"/>
       </Unit2>
       <Unit3>
         <Filename Value="units\frames\uframecliente.pas"/>
@@ -48,9 +48,9 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="uframeCliente"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="81"/>
-        <CursorPos X="65" Y="89"/>
-        <UsageCount Value="86"/>
+        <TopLine Value="48"/>
+        <CursorPos X="17" Y="59"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -64,7 +64,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="24"/>
         <CursorPos X="16" Y="21"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="88"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
@@ -78,7 +78,7 @@
         <EditorIndex Value="8"/>
         <TopLine Value="44"/>
         <CursorPos Y="48"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="84"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit5>
@@ -90,9 +90,9 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="ufraCadCheque"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="22"/>
-        <CursorPos Y="66"/>
-        <UsageCount Value="80"/>
+        <TopLine Value="64"/>
+        <CursorPos X="5" Y="72"/>
+        <UsageCount Value="83"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -106,7 +106,7 @@
         <EditorIndex Value="9"/>
         <TopLine Value="43"/>
         <CursorPos X="4" Y="49"/>
-        <UsageCount Value="78"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit7>
@@ -118,9 +118,9 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="ufraListacontas"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="104"/>
-        <CursorPos Y="116"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="88"/>
+        <CursorPos X="17" Y="98"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
@@ -128,9 +128,9 @@
         <Filename Value="ufuncoes.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="26"/>
-        <CursorPos X="11" Y="40"/>
-        <UsageCount Value="49"/>
+        <TopLine Value="18"/>
+        <CursorPos X="5" Y="22"/>
+        <UsageCount Value="52"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -202,9 +202,9 @@
       <Unit17>
         <Filename Value="uqryDinamicaLZ.pas"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="319"/>
-        <CursorPos X="11" Y="321"/>
-        <UsageCount Value="30"/>
+        <TopLine Value="291"/>
+        <CursorPos X="25" Y="294"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
@@ -395,94 +395,159 @@
         <UsageCount Value="10"/>
       </Unit42>
     </Units>
-    <JumpHistory Count="12" HistoryIndex="11">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="units\frames\ufracadcheque.pas"/>
-        <Caret Line="59" TopLine="47"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="166" TopLine="151"/>
       </Position1>
       <Position2>
-        <Filename Value="units\frames\uframecliente.pas"/>
-        <Caret Line="156" Column="34" TopLine="80"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="170" TopLine="151"/>
       </Position2>
       <Position3>
-        <Filename Value="ufuncoes.pas"/>
-        <Caret Line="40" Column="11" TopLine="26"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="172" TopLine="151"/>
       </Position3>
       <Position4>
-        <Filename Value="ProgrContas.lpr"/>
-        <Caret Line="18"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="173" TopLine="151"/>
       </Position4>
       <Position5>
-        <Filename Value="ProgrContas.lpr"/>
-        <Caret Line="19"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="174" TopLine="151"/>
       </Position5>
       <Position6>
-        <Filename Value="ProgrContas.lpr"/>
-        <Caret Line="20"/>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="175" TopLine="151"/>
       </Position6>
       <Position7>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="150" Column="15" TopLine="222"/>
+        <Caret Line="176" TopLine="151"/>
       </Position7>
       <Position8>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="151" Column="27" TopLine="133"/>
+        <Caret Line="177" TopLine="151"/>
       </Position8>
       <Position9>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="169" Column="51" TopLine="153"/>
+        <Caret Line="178" TopLine="151"/>
       </Position9>
       <Position10>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="251" Column="12" TopLine="240"/>
+        <Caret Line="182" TopLine="154"/>
       </Position10>
       <Position11>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="304" Column="3" TopLine="338"/>
+        <Caret Line="183" TopLine="155"/>
       </Position11>
       <Position12>
         <Filename Value="units\uprincipal.pas"/>
-        <Caret Line="113" Column="21" TopLine="102"/>
+        <Caret Line="184" TopLine="156"/>
       </Position12>
+      <Position13>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="186" TopLine="158"/>
+      </Position13>
+      <Position14>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="158" TopLine="140"/>
+      </Position14>
+      <Position15>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="160" TopLine="140"/>
+      </Position15>
+      <Position16>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="182" TopLine="156"/>
+      </Position16>
+      <Position17>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="183" TopLine="156"/>
+      </Position17>
+      <Position18>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="184" TopLine="156"/>
+      </Position18>
+      <Position19>
+        <Filename Value="units\frames\uframecliente.pas"/>
+        <Caret Line="95" Column="65" TopLine="87"/>
+      </Position19>
+      <Position20>
+        <Filename Value="units\frames\uframecliente.pas"/>
+        <Caret Line="40" Column="19" TopLine="25"/>
+      </Position20>
+      <Position21>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="160" Column="24" TopLine="155"/>
+      </Position21>
+      <Position22>
+        <Filename Value="units\frames\uframecliente.pas"/>
+        <Caret Line="55" Column="8" TopLine="30"/>
+      </Position22>
+      <Position23>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="177" Column="16" TopLine="161"/>
+      </Position23>
+      <Position24>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="408" Column="55" TopLine="391"/>
+      </Position24>
+      <Position25>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="402" Column="4" TopLine="399"/>
+      </Position25>
+      <Position26>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="409" Column="15" TopLine="393"/>
+      </Position26>
+      <Position27>
+        <Filename Value="units\frames\ufracadcheque.pas"/>
+        <Caret Line="111" Column="31" TopLine="80"/>
+      </Position27>
+      <Position28>
+        <Filename Value="units\frames\ufracadcheque.pas"/>
+        <Caret Line="83" Column="52" TopLine="84"/>
+      </Position28>
+      <Position29>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="409" Column="15" TopLine="393"/>
+      </Position29>
+      <Position30>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="411" Column="49" TopLine="392"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="5">
+    <BreakPoints Count="4">
       <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="units\uprincipal.pas"/>
-        <Line Value="138"/>
-      </Item1>
-      <Item2>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="units\frames\ufraListaContas.pas"/>
         <Line Value="78"/>
-      </Item2>
-      <Item3>
+      </Item1>
+      <Item2>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="units\frames\ufralistaclientes.pas"/>
         <Line Value="48"/>
+      </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="units\frames\ufraListaContas.pas"/>
+        <Line Value="117"/>
       </Item3>
       <Item4>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="units\frames\ufraListaContas.pas"/>
-        <Line Value="117"/>
-      </Item4>
-      <Item5>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="units\frames\ufraListaContas.pas"/>
         <Line Value="116"/>
-      </Item5>
+      </Item4>
     </BreakPoints>
   </Debugging>
 </CONFIG>
