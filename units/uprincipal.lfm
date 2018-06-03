@@ -1,9 +1,9 @@
-object Form1: TForm1
-  Left = 263
+object frmPrincipal: TfrmPrincipal
+  Left = 340
   Height = 550
-  Top = 148
+  Top = 101
   Width = 800
-  Caption = 'Form1'
+  Caption = 'Controle de contas'
   ClientHeight = 550
   ClientWidth = 800
   OnCreate = FormCreate
@@ -14,10 +14,10 @@ object Form1: TForm1
     Height = 550
     Top = 0
     Width = 800
-    ActivePage = PgPrincipalTabClientes
+    ActivePage = pgPrincipalTabContas
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = pagePrincipalChange
     object PgPrincipalTabClientes: TTabSheet
@@ -130,6 +130,7 @@ object Form1: TForm1
               DataSet = qryContasCli
             end
             inherited Timer1: TTimer
+              Interval = 1000
               OnTimer = nil
             end
           end
@@ -418,14 +419,11 @@ object Form1: TForm1
         ClientHeight = 522
         ClientWidth = 792
         inherited DBGrid1: TDBGrid
-          Height = 474
+          Height = 467
           Width = 792
         end
         inherited dtsGrid: TDataSource
           DataSet = qryContas
-        end
-        inherited Timer1: TTimer
-          OnTimer = nil
         end
       end
     end
@@ -442,6 +440,9 @@ object Form1: TForm1
         inherited DBGrid1: TDBGrid
           Height = 474
           Width = 792
+        end
+        inherited dtsGrid: TDataSource
+          DataSet = qryCheques
         end
       end
     end
@@ -715,6 +716,12 @@ object Form1: TForm1
         Size = 200
       end    
       item
+        Name = 'CPF'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
         Name = 'CLIENTE_CODIGO_CLIENTE'
         DataType = ftInteger
         Precision = -1
@@ -756,7 +763,7 @@ object Form1: TForm1
     Database = base
     Transaction = trContas
     SQL.Strings = (
-      'select cliente.nome, contas.* from cliente , contas where contas.cliente_codigo_cliente = cliente.codigo'
+      'select cliente.nome,cliente.cpf, contas.* from cliente , contas where contas.cliente_codigo_cliente = cliente.codigo'
     )
     Options = []
     Params = <>
@@ -858,8 +865,19 @@ object Form1: TForm1
       ReadOnly = False
       Required = False
     end
+    object qryContasCPF: TStringField
+      FieldKind = fkData
+      FieldName = 'CPF'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
   end
   object qryCheques: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'NOME'
@@ -922,6 +940,7 @@ object Form1: TForm1
         DataType = ftInteger
         Precision = -1
       end>
+    Active = True
     Database = base
     Transaction = trCheques
     SQL.Strings = (
@@ -933,6 +952,7 @@ object Form1: TForm1
     top = 264
     object qryChequesNOME: TStringField
       DisplayLabel = 'Nome'
+      DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'NOME'
       Index = 0
@@ -964,6 +984,7 @@ object Form1: TForm1
     end
     object qryChequesVALOR: TBCDField
       DisplayLabel = 'Valor'
+      DisplayWidth = 8
       FieldKind = fkData
       FieldName = 'VALOR'
       Index = 3
@@ -989,6 +1010,7 @@ object Form1: TForm1
     end
     object qryChequesNUMERO_CHEQUE: TStringField
       DisplayLabel = 'Nº Cheque'
+      DisplayWidth = 12
       FieldKind = fkData
       FieldName = 'NUMERO_CHEQUE'
       Index = 5
@@ -1000,6 +1022,7 @@ object Form1: TForm1
     end
     object qryChequesBANCO_ORIGEM: TStringField
       DisplayLabel = 'Banco de Origem'
+      DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'BANCO_ORIGEM'
       Index = 6
@@ -1010,6 +1033,7 @@ object Form1: TForm1
     end
     object qryChequesDONO_CHEQUE: TStringField
       DisplayLabel = 'Dono do Cheque'
+      DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'DONO_CHEQUE'
       Index = 7
@@ -1065,7 +1089,7 @@ object Form1: TForm1
     top = 192
   end
   object trCheques: TSQLTransaction
-    Active = False
+    Active = True
     Database = base
     Options = []
     left = 88

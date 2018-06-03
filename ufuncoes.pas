@@ -9,7 +9,7 @@ uses
   procedure avisa(msg:string);
   function confirma(pergunta:string):boolean;
   function str(value:integer):string;overload;
-  function str(value:Currency):string;overload;
+  function str(value:Currency;separador:string = ','):string;overload;
   function strdate(value:TDateTime;mascara:string='yyyy-mm-dd'):string;
   function q(s:string):string;
 
@@ -36,9 +36,11 @@ begin
     result:=IntToStr(value);
 end;
 
-function str(value: Currency): string;
+function str(value: Currency;separador:string): string;
 begin
-    result:= CurrToStr(value);
+  result:=CurrToStr(value);
+  result:= StringReplace(Result,',',separador,[]);
+  result:= StringReplace(Result,'.',separador,[]);
 end;
 
 function strdate(value: TDateTime; mascara: string): string;

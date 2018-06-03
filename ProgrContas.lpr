@@ -17,7 +17,7 @@ ufuncoes
 begin
   RequireDerivedFormResource:=True;
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;
 end.
 

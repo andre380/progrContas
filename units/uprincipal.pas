@@ -15,9 +15,9 @@ uses
 
 type
 
-  { TForm1 }
+  { TfrmPrincipal }
 
-  TForm1 = class(TForm)
+  TfrmPrincipal = class(TForm)
     btnApagar: TBitBtn;
     btnAtualizar: TBitBtn;
     btnNovo: TBitBtn;
@@ -71,6 +71,7 @@ type
     qryContasCLIENTE_CODIGO_CLIENTE1: TLongintField;
     qryContasCODIGO: TLongintField;
     qryContasCODIGO1: TLongintField;
+    qryContasCPF: TStringField;
     qryContasDESCRICAO: TStringField;
     qryContasDESCRICAO1: TStringField;
     qryContasNOME: TStringField;
@@ -114,6 +115,8 @@ type
     procedure carregaCliente;
     procedure atualizaclientes;
     procedure atualizacontas;
+    procedure atualizaCheques;
+    procedure Timer1Timer(Sender: TObject);
   private
     { private declarations }
     edCliente,
@@ -128,15 +131,15 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmPrincipal: TfrmPrincipal;
 
 implementation
 
 {$R *.lfm}
 
-{ TForm1 }
+{ TfrmPrincipal }
 
-procedure TForm1.btnNovoClick(Sender: TObject);
+procedure TfrmPrincipal.btnNovoClick(Sender: TObject);
 begin
   if pagePrincipal.ActivePageIndex=0 then
   begin
@@ -149,7 +152,7 @@ begin
   ControlaBotoes(true);
 end;
 
-procedure TForm1.btnSalvarClick(Sender: TObject);
+procedure TfrmPrincipal.btnSalvarClick(Sender: TObject);
 var
   contaOk, chequeOk, clienteChg: Boolean;
 begin
@@ -183,10 +186,10 @@ begin
   end;
   atualizaclientes;
   atualizacontas;
-  //atualisacheques;
+  atualizaCheques;
 end;
 
-procedure TForm1.btnAlterarClick(Sender: TObject);
+procedure TfrmPrincipal.btnAlterarClick(Sender: TObject);
 begin
   if pagePrincipal.ActivePageIndex=0 then
   begin
@@ -200,7 +203,7 @@ begin
   ControlaBotoes(true);
 end;
 
-procedure TForm1.btnApagarClick(Sender: TObject);
+procedure TfrmPrincipal.btnApagarClick(Sender: TObject);
 var
   qry: Tqrydinamica;
 begin
@@ -219,13 +222,13 @@ begin
   end;
 end;
 
-procedure TForm1.btnAtualizarClick(Sender: TObject);
+procedure TfrmPrincipal.btnAtualizarClick(Sender: TObject);
 begin
   atualizaclientes;
   atualizacontas;
 end;
 
-procedure TForm1.btnCancelarClick(Sender: TObject);
+procedure TfrmPrincipal.btnCancelarClick(Sender: TObject);
 begin
   ControlaBotoes(False);
   IF fraCliente1.Visible THEN
@@ -236,7 +239,7 @@ begin
   end;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   fraLisClientes1.qry:=qryCliente;
   qryCliente.Open;
@@ -248,7 +251,7 @@ begin
   inConta   := false;
 end;
 
-procedure TForm1.ControlaBotoes(editando:Boolean);
+procedure TfrmPrincipal.ControlaBotoes(editando:Boolean);
 begin
   btnNovo.Enabled:=not editando;
   btnAlterar.Enabled:=not editando;
@@ -257,7 +260,7 @@ begin
   btnApagar.Enabled:= not editando;
 end;
 
-procedure TForm1.pageclienteChange(Sender: TObject);
+procedure TfrmPrincipal.pageclienteChange(Sender: TObject);
 begin
   if  pagecliente.ActivePageIndex=0 then
   begin
@@ -281,7 +284,7 @@ begin
     pageclienteTab_Cheques.Caption:= 'Cheques do cliente';
 end;
 
-procedure TForm1.pagePrincipalChange(Sender: TObject);
+procedure TfrmPrincipal.pagePrincipalChange(Sender: TObject);
 begin
   if pagePrincipal.ActivePage = pgPrincipalTabContas then
   begin
@@ -289,19 +292,19 @@ begin
   end;
 end;
 
-procedure TForm1.PgPrincipalTabClientesContextPopup(Sender: TObject;
+procedure TfrmPrincipal.PgPrincipalTabClientesContextPopup(Sender: TObject;
   MousePos: TPoint; var Handled: Boolean);
 begin
 
 end;
 
-procedure TForm1.qryClienteAfterScroll(DataSet: TDataSet);
+procedure TfrmPrincipal.qryClienteAfterScroll(DataSet: TDataSet);
 begin
   if pagecliente.ActivePageIndex=0 then
     codcliente:=qryClienteCODIGO.AsInteger;
 end;
 
-function TForm1.salvacliente:Boolean;
+function TfrmPrincipal.salvacliente:Boolean;
 var
   newCodigo: LongInt;
   qry:Tqrydinamica;
@@ -361,7 +364,7 @@ begin
   end;
 end;
 
-function TForm1.criaConta: boolean;
+function TfrmPrincipal.criaConta: boolean;
 var
   newCodigo: LongInt;
   codcli:string;
@@ -394,10 +397,10 @@ begin
 
   end;
   result:=true;
-      //atualizacontas;
+  atualizacontas;
 end;
 
-function TForm1.SalvaCheque: Boolean;
+function TfrmPrincipal.SalvaCheque: Boolean;
 var
   qry: Tqrydinamica;
   newcodCheque: integer;
@@ -422,7 +425,7 @@ begin
   qry.Free;
 end;
 
-procedure TForm1.carregaCliente;
+procedure TfrmPrincipal.carregaCliente;
 begin
   fraCliente1.nome           := qryClienteNOME.AsString;
   fraCliente1.bairro         := qryClienteBAIRRO.AsString;
@@ -439,18 +442,29 @@ begin
   fraCliente1.carrega;
 end;
 
-procedure TForm1.atualizaclientes;
+procedure TfrmPrincipal.atualizaclientes;
 begin
   trcliente.Active:=false;
   qrycliente.Open;
   qryCliente.Locate('codigo',codcliente,[]);
 end;
 
-procedure TForm1.atualizacontas;
+procedure TfrmPrincipal.atualizacontas;
 begin
   qryContas.Transaction.Active:=false;
   qryContas.Open;
   qrycontas.Locate('cliente_codigo_cliente;codigo',vararrayof([codcliente,codconta]),[]);
+end;
+
+procedure TfrmPrincipal.atualizaCheques;
+begin
+  trCheques.Active:=false;
+  qryCheques.Open;
+end;
+
+procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
+begin
+
 end;
 
 end.
