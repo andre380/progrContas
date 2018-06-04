@@ -14,10 +14,10 @@ object frmPrincipal: TfrmPrincipal
     Height = 550
     Top = 0
     Width = 800
-    ActivePage = pgPrincipalTabContas
+    ActivePage = PgPrincipalTabClientes
     Align = alClient
     Anchors = [akLeft, akRight, akBottom]
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = pagePrincipalChange
     object PgPrincipalTabClientes: TTabSheet
@@ -30,10 +30,10 @@ object frmPrincipal: TfrmPrincipal
         Height = 470
         Top = 8
         Width = 796
-        ActivePage = pageClientetTab_Formulario
+        ActivePage = pageClienteTab_Lista
         Align = alCustom
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 0
         OnChange = pageclienteChange
         object pageClienteTab_Lista: TTabSheet
@@ -122,16 +122,11 @@ object frmPrincipal: TfrmPrincipal
             ClientHeight = 442
             ClientWidth = 788
             inherited DBGrid1: TDBGrid
-              Height = 394
+              Height = 387
               Width = 788
             end
             inherited dtsGrid: TDataSource
-              AutoEdit = False
               DataSet = qryContasCli
-            end
-            inherited Timer1: TTimer
-              Interval = 1000
-              OnTimer = nil
             end
           end
         end
@@ -763,7 +758,10 @@ object frmPrincipal: TfrmPrincipal
     Database = base
     Transaction = trContas
     SQL.Strings = (
-      'select cliente.nome,cliente.cpf, contas.* from cliente , contas where contas.cliente_codigo_cliente = cliente.codigo'
+      'select cliente.nome,cliente.cpf, contas.*'
+      'from cliente , contas'
+      'where contas.cliente_codigo_cliente = cliente.codigo'
+      'order by 1'
     )
     Options = []
     Params = <>
@@ -1096,8 +1094,19 @@ object frmPrincipal: TfrmPrincipal
     top = 264
   end
   object qryContasCli: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Precision = -1
+        Size = 200
+      end    
+      item
+        Name = 'CPF'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
       item
         Name = 'CLIENTE_CODIGO_CLIENTE'
         DataType = ftInteger
@@ -1136,11 +1145,14 @@ object frmPrincipal: TfrmPrincipal
         DataType = ftDate
         Precision = -1
       end>
-    Active = True
     Database = base
     Transaction = trContascli
     SQL.Strings = (
-      'select * from contas where contas.cliente_codigo_cliente = :CodCliente'
+      'select cliente.nome,cliente.cpf, contas.*'
+      'from cliente , contas'
+      'where contas.cliente_codigo_cliente = cliente.codigo'
+      'and  contas.cliente_codigo_cliente = :CodCliente'
+      'order by 3'
     )
     Options = []
     Params = <    
@@ -1234,6 +1246,27 @@ object frmPrincipal: TfrmPrincipal
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+    end
+    object qryContasCliNOME: TStringField
+      FieldKind = fkData
+      FieldName = 'NOME'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+      Size = 200
+    end
+    object qryContasCliCPF: TStringField
+      FieldKind = fkData
+      FieldName = 'CPF'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
     end
   end
   object trContascli: TSQLTransaction

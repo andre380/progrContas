@@ -67,8 +67,10 @@ type
     qryContas: TSQLQuery;
     qryCheques: TSQLQuery;
     qryContasCli: TSQLQuery;
+    qryContasCliCPF: TStringField;
     qryContasCLIENTE_CODIGO_CLIENTE: TLongintField;
     qryContasCLIENTE_CODIGO_CLIENTE1: TLongintField;
+    qryContasCliNOME: TStringField;
     qryContasCODIGO: TLongintField;
     qryContasCODIGO1: TLongintField;
     qryContasCPF: TStringField;
@@ -258,6 +260,7 @@ begin
   btnCancelar.Enabled:= editando;
   btnSalvar.Enabled:= editando;
   btnApagar.Enabled:= not editando;
+  btnAtualizar.Enabled:=not editando;
 end;
 
 procedure TfrmPrincipal.pageclienteChange(Sender: TObject);
@@ -273,7 +276,10 @@ begin
   if  pagecliente.ActivePageIndex=2 then
   begin
     pageClienteTab_Contas.Caption:= 'Contas de '+Copy(qryClienteNOME.AsString,1,50);
-  end
+    trContascli.Active:=false;
+    qryContasCli.ParamByName('CodCliente').AsInteger:=codcliente;
+    qryContasCli.Open;
+ end
   else
     pageClienteTab_Contas.Caption:= 'Contas do cliente';
   if  pagecliente.ActivePageIndex=3 then
@@ -282,6 +288,7 @@ begin
   end
   else
     pageclienteTab_Cheques.Caption:= 'Cheques do cliente';
+
 end;
 
 procedure TfrmPrincipal.pagePrincipalChange(Sender: TObject);

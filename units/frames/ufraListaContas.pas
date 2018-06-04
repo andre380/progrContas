@@ -5,8 +5,9 @@ unit ufraListacontas;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, DateTimePicker, Forms, Controls, ExtCtrls,
-  DBGrids, Buttons, StdCtrls,dialogs,sqldb, db,ufuncoes,uqryDinamicaLZ, variants;
+  Classes, windows, SysUtils, FileUtil, DateTimePicker, Forms, Controls,
+  ExtCtrls, DBGrids, Buttons, StdCtrls, dialogs, sqldb, db, ufuncoes,
+  uqryDinamicaLZ, variants, strutils, ShellApi;
 
 type
 
@@ -58,8 +59,9 @@ var
   codcli,codconta:integer;
 begin
   valorDev:=dtsGrid.DataSet.FieldByName('valor').AsCurrency-dtsGrid.DataSet.FieldByName('valorpago').AsCurrency;
-  valorPg:=InputBox('Pagamento','Valor pago',
-                str(valorDev) );
+  valorPg:=str(valorDev);
+  if not InputQuery('Pagamento','Valor pago',valorPg ) then
+    valorPg:='';            ;
   if StrToCurrDef(valorPg,0) > 0 then
   begin
     codcli:=qry.FieldByName('cliente_codigo_cliente').AsInteger;
@@ -176,10 +178,34 @@ begin
 end;
 
 procedure TfraListaContas.btnImprimeClick(Sender: TObject);
+var
+  stl1: TStringList;
+  valordevido: String;
+  parametro: string;
 begin
   if Assigned(dtsGrid.DataSet) then
   begin
-
+    stl1:=TStringList.Create;
+    qry.first;
+    stl1.Add('|'+PadRight('Nome',50)+
+         '|'+PadCenter('vencimento',12)+
+         '|'+PadCenter('valor'    ,12)+
+         '|'+PadCenter('valorpago',12)+
+         '|'+PadCenter('valordevido',12)+'|');
+    stl1.Add(' ');
+    while not qry.EOF do
+    begin
+      valordevido:=CurrToStr(qry.fieldByName('valor').AsCurrency-qry.fieldByName('valorpago' ).AsCurrency);
+      stl1.Add('|'+PadRight(copy(qry.FieldByName('nome').AsString,1,50),50)+
+               '|'+PadCenter(qry.fieldByName('vencimento').AsString,12)+
+               '|'+PadCenter(qry.fieldByName('valor'     ).AsString,12)+
+               '|'+PadCenter(qry.fieldByName('valorpago' ).AsString,12)+
+               '|'+PadCenter(valordevido,12)+'|');
+      qry.Next;
+    end;
+    stl1.SaveToFile('teste.txt');
+    parametro :='notepad.exe '+ExtractFileDir(ParamStr(0))+'\teste.txt';
+    WinExec(PChar( parametro),1);
   end
   else
   ShowMessage('Erro: qry não definida');
