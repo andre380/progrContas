@@ -71,6 +71,7 @@ type
     qryContasCLIENTE_CODIGO_CLIENTE: TLongintField;
     qryContasCLIENTE_CODIGO_CLIENTE1: TLongintField;
     qryContasCliNOME: TStringField;
+    qryContasCliTELEFONE1: TStringField;
     qryContasCODIGO: TLongintField;
     qryContasCODIGO1: TLongintField;
     qryContasCPF: TStringField;
@@ -79,6 +80,7 @@ type
     qryContasNOME: TStringField;
     qryContasQUITACAO: TDateField;
     qryContasQUITACAO1: TDateField;
+    qryContasTELEFONE1: TStringField;
     qryContasVALOR: TBCDField;
     qryContasVALOR1: TBCDField;
     qryContasVALORPAGO: TBCDField;
@@ -173,14 +175,13 @@ begin
       begin
         chequeOk:=fraCadCheque1.valida;
       end;
-      if contaok and chequeOk and confirma('salvar as alterações no cliente')  then
+      if contaok and chequeOk and (inCliente or confirma('salvar as alterações no cliente'))  then
       begin
         salvacliente;
-        if contaok then
+        if fraCadastracontas1.alterou and contaok  then
           criaConta;
-        if chequeOk then
+        if fraCadCheque1.alterou and chequeOk then
           salvacheque;
-        inCliente:=false;
         ControlaBotoes(False);
         avisa('Gravação concluida!');
       end;
@@ -212,7 +213,7 @@ begin
   if pagePrincipal.ActivePageIndex = 0 then
   begin
     qry:=Tqrydinamica.create(base);
-    if QuestionDlg('apagar cliente','apagar o cliente mesmo?',mtWarning,[1,2],1) = mrOK  then
+    if QuestionDlg('apagar cliente','apagar o cliente '+qryClienteNOME.AsString+ '?',mtWarning,[1,2],1) = mrOK  then
       if QuestionDlg('APAGA MESMO?','apagar todas as contas e cheques do cliente TUDO MESMO ?',mtWarning,[1,2],1) = mrOK then
       begin
         //opa
@@ -237,6 +238,7 @@ begin
   begin
     fraCliente1.limpa;
     fraCadastracontas1.limpa;
+    fraCadCheque1.limpa;
     carregaCliente;
   end;
 end;
@@ -251,6 +253,8 @@ begin
   inCheque  := false;
   edConta   := false;
   inConta   := false;
+  base.DatabaseName:=ExtractFileDir(ParamStr(0))+'\base.fdb';
+  base.Connected:=true;
 end;
 
 procedure TfrmPrincipal.ControlaBotoes(editando:Boolean);
@@ -261,6 +265,13 @@ begin
   btnSalvar.Enabled:= editando;
   btnApagar.Enabled:= not editando;
   btnAtualizar.Enabled:=not editando;
+  if not editando then
+  begin
+    inCliente:=false;
+    edCliente:=False;
+    fraCadCheque1.limpa;
+    fraCadastracontas1.limpa;
+  end;
 end;
 
 procedure TfrmPrincipal.pageclienteChange(Sender: TObject);
@@ -374,7 +385,7 @@ end;
 function TfrmPrincipal.criaConta: boolean;
 var
   newCodigo: LongInt;
-  codcli:string;
+  codcli, str1, parc:string;
   qry:Tqrydinamica;
   diadomes, cont: Integer;
   vencimento: TDate;
@@ -384,8 +395,10 @@ begin
 
   qry:=Tqrydinamica.create(base);
   codcli:=IntToStr(codcliente);
-  vencimento:=fraCadastracontas1.vencimento;
+  vencimento:=IncMonth(fraCadastracontas1.vencimento,-1);
   valor := fraCadastracontas1.valor/fraCadastracontas1.parcelas;
+  parc:= str(fraCadastracontas1.parcelas);
+  str1:='';
   for cont := 1 to fraCadastracontas1.parcelas do
   begin
     vencimento:=IncMonth(vencimento);
@@ -393,9 +406,11 @@ begin
     newCodigo:=qry.campoint('max')+1;
     qry.sql:='insert into contas values (:CLIENTE_CODIGO_CLIENTE,:CODIGO,:DESCRICAO,:VALOR,:VALORPAGO,:VENCIMENTO,null)';
     qry.prepare;
+    if parc <> '1' then
+    str1:='['+IntToStr(cont)+'/'+parc+'] ';
     qry.ParamByName('CLIENTE_CODIGO_CLIENTE').AsInteger:= codcliente;
     qry.ParambyName('CODIGO').AsInteger                := newCodigo;
-    qry.ParambyName('DESCRICAO').AsString              := 'p'+IntToStr(cont)+' '+fraCadastracontas1.descricao;
+    qry.ParambyName('DESCRICAO').AsString              := str1+fraCadastracontas1.descricao;
     qry.ParambyName('VALOR').AsCurrency                := valor;
     qry.ParambyName('VALORPAGO').AsCurrency            := 0;
     qry.ParambyName('VENCIMENTO').AsDate               := vencimento;

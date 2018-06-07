@@ -115,15 +115,18 @@ object frmPrincipal: TfrmPrincipal
           Caption = 'Contas do cliente'
           ClientHeight = 442
           ClientWidth = 788
-          inline fraLisClientes2: TfraLisClientes
+          inline fraListaContas2: TfraListaContas
             Height = 442
             Width = 788
             Align = alClient
             ClientHeight = 442
             ClientWidth = 788
             inherited DBGrid1: TDBGrid
-              Height = 394
+              Height = 387
               Width = 788
+            end
+            inherited rgFiltros: TRadioGroup
+              ItemIndex = 0
             end
             inherited dtsGrid: TDataSource
               DataSet = qryContasCli
@@ -417,6 +420,9 @@ object frmPrincipal: TfrmPrincipal
           Height = 467
           Width = 792
         end
+        inherited rgFiltros: TRadioGroup
+          ItemIndex = 0
+        end
         inherited dtsGrid: TDataSource
           DataSet = qryContas
         end
@@ -445,7 +451,7 @@ object frmPrincipal: TfrmPrincipal
   object base: TIBConnection
     Connected = True
     LoginPrompt = False
-    DatabaseName = 'C:\Users\andre\Desktop\progrContas\bin\base.fdb'
+    DatabaseName = 'base.fdb'
     KeepConnection = False
     Password = 'masterkey'
     Transaction = trdefault
@@ -547,7 +553,7 @@ object frmPrincipal: TfrmPrincipal
     Database = base
     Transaction = trcliente
     SQL.Strings = (
-      'select * from cliente'
+      'select * from cliente  order by nome'
     )
     Options = []
     Params = <>
@@ -702,7 +708,6 @@ object frmPrincipal: TfrmPrincipal
     end
   end
   object qryContas: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'NOME'
@@ -712,6 +717,12 @@ object frmPrincipal: TfrmPrincipal
       end    
       item
         Name = 'CPF'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'TELEFONE1'
         DataType = ftString
         Precision = -1
         Size = 20
@@ -754,11 +765,10 @@ object frmPrincipal: TfrmPrincipal
         DataType = ftDate
         Precision = -1
       end>
-    Active = True
     Database = base
     Transaction = trContas
     SQL.Strings = (
-      'select cliente.nome,cliente.cpf, contas.*'
+      'select cliente.nome,cliente.cpf,cliente.telefone1, contas.*'
       'from cliente , contas'
       'where contas.cliente_codigo_cliente = cliente.codigo'
       'order by 1'
@@ -873,9 +883,18 @@ object frmPrincipal: TfrmPrincipal
       Required = False
       Visible = False
     end
+    object qryContasTELEFONE1: TStringField
+      FieldKind = fkData
+      FieldName = 'TELEFONE1'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
   end
   object qryCheques: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'NOME'
@@ -938,7 +957,6 @@ object frmPrincipal: TfrmPrincipal
         DataType = ftInteger
         Precision = -1
       end>
-    Active = True
     Database = base
     Transaction = trCheques
     SQL.Strings = (
@@ -1073,7 +1091,7 @@ object frmPrincipal: TfrmPrincipal
     end
   end
   object trcliente: TSQLTransaction
-    Active = True
+    Active = False
     Database = base
     Options = []
     left = 88
@@ -1087,7 +1105,7 @@ object frmPrincipal: TfrmPrincipal
     top = 192
   end
   object trCheques: TSQLTransaction
-    Active = True
+    Active = False
     Database = base
     Options = []
     left = 88
@@ -1103,6 +1121,12 @@ object frmPrincipal: TfrmPrincipal
       end    
       item
         Name = 'CPF'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'TELEFONE1'
         DataType = ftString
         Precision = -1
         Size = 20
@@ -1148,7 +1172,7 @@ object frmPrincipal: TfrmPrincipal
     Database = base
     Transaction = trContascli
     SQL.Strings = (
-      'select cliente.nome,cliente.cpf, contas.*'
+      'select cliente.nome,cliente.cpf, cliente.telefone1, contas.*'
       'from cliente , contas'
       'where contas.cliente_codigo_cliente = cliente.codigo'
       'and  contas.cliente_codigo_cliente = :CodCliente'
@@ -1262,6 +1286,16 @@ object frmPrincipal: TfrmPrincipal
       FieldKind = fkData
       FieldName = 'CPF'
       Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object qryContasCliTELEFONE1: TStringField
+      FieldKind = fkData
+      FieldName = 'TELEFONE1'
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

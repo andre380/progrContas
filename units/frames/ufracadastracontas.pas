@@ -79,7 +79,7 @@ begin
 
   edtDescricao.Text:='';
   edtValor.Text:='';
-  edtVencimento.Date:=Date;
+  edtVencimento.Date:=Date+30;
   spnParcelas.Value:=1;
 
   descricao:=edtDescricao.Text;

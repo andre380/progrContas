@@ -187,20 +187,22 @@ begin
   begin
     stl1:=TStringList.Create;
     qry.first;
-    stl1.Add('|'+PadRight('Nome',50)+
-         '|'+PadCenter('vencimento',12)+
-         '|'+PadCenter('valor'    ,12)+
-         '|'+PadCenter('valorpago',12)+
-         '|'+PadCenter('valordevido',12)+'|');
+    stl1.Add('|'+PadRight('Nome',30)+
+         '|'+PadCenter('telefone',8)+
+         '|'+PadCenter('vencimento',10)+
+         '|'+PadCenter('Conta'    ,8)+
+         '|'+PadCenter('pago',8)+
+         '|'+PadCenter('a pagar',8)+'|');
     stl1.Add(' ');
     while not qry.EOF do
     begin
       valordevido:=CurrToStr(qry.fieldByName('valor').AsCurrency-qry.fieldByName('valorpago' ).AsCurrency);
-      stl1.Add('|'+PadRight(copy(qry.FieldByName('nome').AsString,1,50),50)+
-               '|'+PadCenter(qry.fieldByName('vencimento').AsString,12)+
-               '|'+PadCenter(qry.fieldByName('valor'     ).AsString,12)+
-               '|'+PadCenter(qry.fieldByName('valorpago' ).AsString,12)+
-               '|'+PadCenter(valordevido,12)+'|');
+      stl1.Add('|'+PadRight(copy(qry.FieldByName('nome').AsString,1,30),30)+
+               '|'+PadCenter(qry.fieldByName('telefone1').AsString,8)+
+               '|'+PadCenter(qry.fieldByName('vencimento').AsString,8)+
+               '|'+PadCenter(qry.fieldByName('valor'     ).AsString,8)+
+               '|'+PadCenter(qry.fieldByName('valorpago' ).AsString,8)+
+               '|'+PadCenter(valordevido,8)+'|');
       qry.Next;
     end;
     stl1.SaveToFile('teste.txt');

@@ -112,7 +112,7 @@ object fraListaContas: TfraListaContas
     ClientHeight = 53
     ClientWidth = 149
     Columns = 2
-    ItemIndex = 0
+    ItemIndex = 4
     Items.Strings = (
       'a  vencer'
       'vencidas'

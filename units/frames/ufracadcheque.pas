@@ -57,6 +57,7 @@ begin
  edtBancoOrigem.Text          := '';
  edtNumeroCheque.Text         := '';
  edtdonocheque.Text           := '';
+ edtValor.Text                := '';
  chkCompensado.Checked        := False;
  chkDevolvido.Checked         := False;
 end;
