@@ -13,6 +13,7 @@ type
   { TfraCadastracontas }
 
   TfraCadastracontas = class(TFrame)
+    edtEntrada: TLabeledEdit;
     edtVencimento: TDateTimePicker;
     edtDescricao: TLabeledEdit;
     edtValor: TLabeledEdit;
@@ -26,7 +27,7 @@ type
     { public declarations }
     alterou:boolean;
     descricao:string;
-    valor:Currency;
+    valor,entrada:Currency;
     vencimento:TDate;
     parcelas:integer;
     function valida:boolean;
@@ -64,10 +65,10 @@ begin
   else
     edtDescricao.EditLabel.Font.Color:=clBlack;
   if Result then
-
   begin
     descricao:=edtDescricao.Text;
     valor:= StrToCurrDef(edtValor.Text,0);
+    entrada:=StrToCurrDef(edtEntrada.Text,0);
     vencimento:=edtVencimento.Date;
     parcelas:=spnParcelas.Value;
   end;
@@ -79,11 +80,13 @@ begin
 
   edtDescricao.Text:='';
   edtValor.Text:='';
+  edtEntrada.Text:='';
   edtVencimento.Date:=Date+30;
   spnParcelas.Value:=1;
 
   descricao:=edtDescricao.Text;
   valor:= StrToCurrDef(edtValor.Text,0);
+  entrada:= 0;
   vencimento:=edtVencimento.Date;
   parcelas:=spnParcelas.Value;
   edtDescricao.EditLabel.Font.Color:=clBlack;

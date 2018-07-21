@@ -45,6 +45,7 @@ procedure TfraLisClientes.Timer1Timer(Sender: TObject);
 begin
   if assigned(dtsGrid.DataSet) and (dtsGrid.DataSet.Filter <> filtro) then
   begin
+    dtsGrid.DataSet.FilterOptions:=[foCaseInsensitive];
     dtsGrid.DataSet.Filter:=filtro;
     dtsGrid.DataSet.Filtered:=true;
   end;

@@ -106,6 +106,7 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure fraCadastracontas1Click(Sender: TObject);
     procedure pageclienteChange(Sender: TObject);
     procedure pagePrincipalChange(Sender: TObject);
     procedure PgPrincipalTabClientesContextPopup(Sender: TObject;
@@ -255,6 +256,12 @@ begin
   inConta   := false;
   base.DatabaseName:=ExtractFileDir(ParamStr(0))+'\base.fdb';
   base.Connected:=true;
+  pagecliente.TabIndex:=0;
+end;
+
+procedure TfrmPrincipal.fraCadastracontas1Click(Sender: TObject);
+begin
+
 end;
 
 procedure TfrmPrincipal.ControlaBotoes(editando:Boolean);
@@ -396,7 +403,26 @@ begin
   qry:=Tqrydinamica.create(base);
   codcli:=IntToStr(codcliente);
   vencimento:=IncMonth(fraCadastracontas1.vencimento,-1);
-  valor := fraCadastracontas1.valor/fraCadastracontas1.parcelas;
+
+
+  if fraCadastracontas1.entrada >0 then
+  begin
+    qry.executasql('select max(contas.codigo) from contas where contas.cliente_codigo_cliente = '+q(codcli));
+    newCodigo:=qry.campoint('max')+1;
+    qry.sql:='insert into contas values (:CLIENTE_CODIGO_CLIENTE,:CODIGO,:DESCRICAO,:VALOR,:VALORPAGO,:VENCIMENTO,null)';
+    qry.prepare;
+    qry.ParamByName('CLIENTE_CODIGO_CLIENTE').AsInteger:= codcliente;
+    qry.ParambyName('CODIGO').AsInteger                := newCodigo;
+    qry.ParambyName('DESCRICAO').AsString              := '[ENTRADA] '+fraCadastracontas1.descricao;
+    qry.ParambyName('VALOR').AsCurrency                := fraCadastracontas1.entrada;
+    qry.ParambyName('VALORPAGO').AsCurrency            := fraCadastracontas1.entrada;
+    qry.ParambyName('VENCIMENTO').AsDate               := Date;
+    qry.qry.ExecSQL;
+    qry.commit;
+
+    valor:=fraCadastracontas1.valor-fraCadastracontas1.entrada;
+  end;
+  valor := valor/fraCadastracontas1.parcelas;
   parc:= str(fraCadastracontas1.parcelas);
   str1:='';
   for cont := 1 to fraCadastracontas1.parcelas do
