@@ -44,11 +44,13 @@ type
     function paramdate(param:string;valor:TDate):boolean;
     function paramtime(param:string;valor:TDateTime):boolean;
     procedure edit;
+    procedure delete;
     procedure post;
     procedure commit;
     procedure rollback;
     constructor create(database:TIBConnection);
     procedure prepare;
+    procedure unprepare;
     function ParamByName(Const AParamName : String) : TParam;
 
     destructor destroy; override;
@@ -229,6 +231,11 @@ begin
   qry.Edit;
 end;
 
+procedure Tqrydinamica.delete;
+begin
+  qry.Delete;
+end;
+
 procedure Tqrydinamica.post;
 begin
   qry.Post;
@@ -288,6 +295,12 @@ begin
   qry.Prepare;
 end;
 
+procedure Tqrydinamica.unprepare;
+begin
+  qry.Close;
+  qry.UnPrepare;
+end;
+
 function Tqrydinamica.ParamByName(const AParamName: String): TParam;
 begin
   if not qry.Prepared then
@@ -336,8 +349,12 @@ begin
     trans.Rollback;
     qry.Transaction.active:=false;//. close;
   end;
-  qry.SQL.Clear;
-  qry.SQL.Add(aSQL);
+  if qry.Prepared and (sql = aSQL)then
+  else
+  begin
+    qry.SQL.Clear;
+    qry.SQL.Add(aSQL);
+  end;
   result:=true;
   try
     if (pos('DROP',UpperCase(trim(aSQL))) = 1) or

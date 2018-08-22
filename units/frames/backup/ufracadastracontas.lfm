@@ -46,7 +46,7 @@ object fraCadastracontas: TfraCadastracontas
     OnChange = edtDescricaoChange
   end
   object edtVencimento: TDateTimePicker
-    Left = 96
+    Left = 197
     Height = 23
     Top = 65
     Width = 83
@@ -68,9 +68,9 @@ object fraCadastracontas: TfraCadastracontas
     MonthNames = 'Long'
   end
   object spnParcelas: TSpinEdit
-    Left = 200
+    Left = 288
     Height = 23
-    Top = 64
+    Top = 65
     Width = 50
     MaxValue = 10
     MinValue = 1
@@ -79,7 +79,7 @@ object fraCadastracontas: TfraCadastracontas
     Value = 1
   end
   object Label1: TLabel
-    Left = 200
+    Left = 288
     Height = 15
     Top = 48
     Width = 43
@@ -87,11 +87,29 @@ object fraCadastracontas: TfraCadastracontas
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 96
+    Left = 197
     Height = 15
     Top = 48
     Width = 63
     Caption = 'vencimento'
     ParentColor = False
+  end
+  object edtEntrada: TLabeledEdit
+    Left = 104
+    Height = 23
+    Top = 65
+    Width = 80
+    EditLabel.AnchorSideLeft.Control = edtEntrada
+    EditLabel.AnchorSideRight.Control = edtEntrada
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = edtEntrada
+    EditLabel.Left = 104
+    EditLabel.Height = 15
+    EditLabel.Top = 47
+    EditLabel.Width = 80
+    EditLabel.Caption = 'Entrada'
+    EditLabel.ParentColor = False
+    TabOrder = 4
+    OnChange = edtDescricaoChange
   end
 end

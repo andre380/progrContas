@@ -32,6 +32,7 @@ type
     parcelas:integer;
     function valida:boolean;
     procedure limpa;
+    procedure carrega;
   end;
 
 implementation
@@ -48,6 +49,14 @@ end;
 function TfraCadastracontas.valida: boolean;
 begin
   result:=true;
+  if StrToCurrDef(edtEntrada.Text,-1)=-1 then
+  begin
+    result:=false;
+    edtEntrada.EditLabel.Font.Color:=clRed;
+    edtEntrada.SetFocus;
+  end
+  else
+    edtEntrada.EditLabel.Font.Color:=clBlack;
   if StrToCurrDef(edtValor.Text,0)=0 then
   begin
     result:=false;
@@ -91,6 +100,15 @@ begin
   parcelas:=spnParcelas.Value;
   edtDescricao.EditLabel.Font.Color:=clBlack;
   edtValor.EditLabel.Font.Color:=clBlack;
+end;
+
+procedure TfraCadastracontas.carrega;
+begin
+  edtDescricao.Text  := descricao;
+  edtValor.Text      := CurrToStr(valor);
+  edtEntrada.Text    := CurrToStr(entrada);
+  edtVencimento.Date := vencimento;
+  spnParcelas.Value  := parcelas;
 end;
 
 end.

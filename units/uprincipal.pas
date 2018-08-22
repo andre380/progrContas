@@ -18,6 +18,7 @@ type
   { TfrmPrincipal }
 
   TfrmPrincipal = class(TForm)
+    btnEditar: TBitBtn;
     btnApagar: TBitBtn;
     btnAtualizar: TBitBtn;
     btnNovo: TBitBtn;
@@ -103,6 +104,7 @@ type
     procedure btnApagarClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -114,6 +116,7 @@ type
     procedure qryClienteAfterScroll(DataSet: TDataSet);
 
     procedure ControlaBotoes(editando:Boolean);
+    procedure qryContasCliAfterScroll(DataSet: TDataSet);
     function salvacliente:Boolean;
     function criaConta:boolean;
     function SalvaCheque :Boolean;
@@ -143,6 +146,9 @@ implementation
 {$R *.lfm}
 
 { TfrmPrincipal }
+uses
+  ufrmEditaConta
+  ;
 
 procedure TfrmPrincipal.btnNovoClick(Sender: TObject);
 begin
@@ -244,6 +250,17 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.btnEditarClick(Sender: TObject);
+begin
+  if qryContasCli.RecordCount = 0 then exit;
+  if frmEditaConta = nil then
+    Application.CreateForm(TfrmEditaConta,frmEditaConta);
+  frmEditaConta.codigo_Cliente:=codcliente;
+  frmEditaConta.codigo_conta:=codconta;
+  frmEditaConta.ShowModal;
+  pageclienteChange(Sender);
+end;
+
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   fraLisClientes1.qry:=qryCliente;
@@ -281,6 +298,12 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.qryContasCliAfterScroll(DataSet: TDataSet);
+begin
+  if pagecliente.ActivePageIndex=2 then
+    codconta:= qryContasCli.FieldByName('codigo').AsInteger;
+end;
+
 procedure TfrmPrincipal.pageclienteChange(Sender: TObject);
 begin
   if  pagecliente.ActivePageIndex=0 then
@@ -308,6 +331,8 @@ begin
     pageclienteTab_Cheques.Caption:= 'Cheques do cliente';
 
 end;
+
+
 
 procedure TfrmPrincipal.pagePrincipalChange(Sender: TObject);
 begin

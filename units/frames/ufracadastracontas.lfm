@@ -53,7 +53,7 @@ object fraCadastracontas: TfraCadastracontas
     CenturyFrom = 1941
     MaxDate = 2958465
     MinDate = -53780
-    TabOrder = 2
+    TabOrder = 3
     TrailingSeparator = False
     TextForNullDate = 'NULL'
     LeadingZeros = True
@@ -75,7 +75,7 @@ object fraCadastracontas: TfraCadastracontas
     MaxValue = 10
     MinValue = 1
     OnChange = edtDescricaoChange
-    TabOrder = 3
+    TabOrder = 4
     Value = 1
   end
   object Label1: TLabel
@@ -109,7 +109,7 @@ object fraCadastracontas: TfraCadastracontas
     EditLabel.Width = 80
     EditLabel.Caption = 'Entrada'
     EditLabel.ParentColor = False
-    TabOrder = 4
+    TabOrder = 2
     OnChange = edtDescricaoChange
   end
 end
