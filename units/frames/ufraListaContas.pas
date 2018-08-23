@@ -118,7 +118,8 @@ begin
   begin
     IF rgFiltros.ItemIndex =0 then// A VENCER
     begin
-      filtroBTNs:='(DTOS(vencimento) >= '+q(strdate(Date,'yyyymmdd'))+') and (DTOS(vencimento) < '+q(strdate(Date+15,'yyyymmdd'))+')and ( valor > valorpago)';
+      filtroBTNs:='((DTOS(vencimento) >= '+q(strdate(Date,'yyyymmdd'))+') and (DTOS(vencimento) < '+q(strdate(Date+30,'yyyymmdd'))+')and ( valor > valorpago)) or '+
+      '((DTOS(vencimento) <= '+q(strdate(Date,'yyyymmdd'))+') and ( valor > valorpago))';
     end;
     IF rgFiltros.ItemIndex =1 then// VENCIDAS
     begin
