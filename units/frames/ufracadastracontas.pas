@@ -65,7 +65,7 @@ begin
   end
   else
     edtValor.EditLabel.Font.Color:=clBlack;
-  if Length(edtDescricao.Text)<5 then
+  if Length(edtDescricao.Text)<3 then
   begin
     result:=false;
     edtDescricao.SetFocus;

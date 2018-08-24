@@ -57,70 +57,71 @@ end;
 function TfraCliente.valida: boolean;
 begin
   result:=true;
-  if Length(edtTelefone1.Text)< 5 then
-  begin
-    edtTelefone1.EditLabel.Font.Color:=clRed;
-    edtTelefone1.setfocus;
-    result:=false;
-  end
-  else
-    edtTelefone1.EditLabel.Font.Color:=clBlack;
-  if Length(edtEmail.Text)< 5 then
-  begin
-    edtEmail.EditLabel.Font.Color:=clRed;
-    edtEmail.setfocus;
-    result:=false;
-  end
-  else
-    edtEmail.EditLabel.Font.Color:=clBlack;
- if Length(edtCidade.Text)< 5 then
-  begin
-    edtCidade.EditLabel.Font.Color:=clRed;
-    edtCidade.setfocus;
-    result:=false;
-  end
-  else
-    edtCidade.EditLabel.Font.Color:=clBlack;
-  if Length(edtBairro.Text)< 5 then
-  begin
-    edtBairro.EditLabel.Font.Color:=clRed;
-    edtBairro.setfocus;
-    result:=false;
-  end
-  else
-    edtBairro.EditLabel.Font.Color:=clBlack;
-  if Length(edtEndereco.Text)< 5 then
-  begin
-    edtEndereco.EditLabel.Font.Color:=clRed;
-    edtEndereco.setfocus;
-    result:=false;
-  end
-  else
-    edtEndereco.EditLabel.Font.Color:=clBlack;
+ // if Length(edtTelefone1.Text)< 5 then
+ // begin
+ //   edtTelefone1.EditLabel.Font.Color:=clRed;
+ //   edtTelefone1.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtTelefone1.EditLabel.Font.Color:=clBlack;
+ // if Length(edtEmail.Text)< 5 then
+ // begin
+ //   edtEmail.EditLabel.Font.Color:=clRed;
+ //   edtEmail.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtEmail.EditLabel.Font.Color:=clBlack;
+ //if Length(edtCidade.Text)< 5 then
+ // begin
+ //   edtCidade.EditLabel.Font.Color:=clRed;
+ //   edtCidade.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtCidade.EditLabel.Font.Color:=clBlack;
+ // if Length(edtBairro.Text)< 5 then
+ // begin
+ //   edtBairro.EditLabel.Font.Color:=clRed;
+ //   edtBairro.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtBairro.EditLabel.Font.Color:=clBlack;
+ // if Length(edtEndereco.Text)< 5 then
+ // begin
+ //   edtEndereco.EditLabel.Font.Color:=clRed;
+ //   edtEndereco.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtEndereco.EditLabel.Font.Color:=clBlack;
   if edtNascimento.DateIsNull then
   begin
+    edtNascimento.date:=0;
     lblNascimento.Font.Color:=clRed;
-    edtNascimento.setfocus;
-    result:=false;
+    //edtNascimento.setfocus;
+    //result:=false;
   end
   else
     lblNascimento.Font.Color:=clBlack;
-  if Length(edtRG.Text)< 5 then
-  begin
-    edtRG.EditLabel.Font.Color:=clRed;
-    edtRG.setfocus;
-    result:=false;
-  end
-  else
-    edtRG.EditLabel.Font.Color:=clBlack;
-  if Length(edtCPF.Text)< 5 then
-  begin
-    edtCPF.EditLabel.Font.Color:=clRed;
-    edtCPF.setfocus;
-    result:=false;
-  end
-  else
-    edtCPF.EditLabel.Font.Color:=clBlack;
+ // if Length(edtRG.Text)< 5 then
+ // begin
+ //   edtRG.EditLabel.Font.Color:=clRed;
+ //   edtRG.setfocus;
+ //   result:=false;
+ // end
+ // else
+ //   edtRG.EditLabel.Font.Color:=clBlack;
+  //if Length(edtCPF.Text)< 5 then
+  //begin
+  //  edtCPF.EditLabel.Font.Color:=clRed;
+  //  edtCPF.setfocus;
+  //  result:=false;
+  //end
+  //else
+  //  edtCPF.EditLabel.Font.Color:=clBlack;
   if Length(edtNome.Text)< 5 then
   begin
     edtNome.EditLabel.Font.Color:=clRed;

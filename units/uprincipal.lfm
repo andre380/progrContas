@@ -30,10 +30,10 @@ object frmPrincipal: TfrmPrincipal
         Height = 470
         Top = 8
         Width = 796
-        ActivePage = pageClienteTab_Contas
+        ActivePage = pageClientetTab_Formulario
         Align = alCustom
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 2
+        TabIndex = 1
         TabOrder = 0
         OnChange = pageclienteChange
         object pageClienteTab_Lista: TTabSheet
@@ -89,12 +89,10 @@ object frmPrincipal: TfrmPrincipal
               OnClick = fraCadastracontas1Click
               inherited edtVencimento: TDateTimePicker
                 Left = 179
-                TabOrder = 2
               end
               inherited spnParcelas: TSpinEdit
                 Left = 273
                 Top = 64
-                TabOrder = 3
               end
               inherited Label1: TLabel
                 Left = 269
@@ -106,7 +104,6 @@ object frmPrincipal: TfrmPrincipal
               inherited edtEntrada: TLabeledEdit
                 Left = 93
                 EditLabel.Left = 93
-                TabOrder = 4
               end
             end
           end
@@ -149,6 +146,14 @@ object frmPrincipal: TfrmPrincipal
             end
             inherited rgFiltros: TRadioGroup
               ItemIndex = 0
+              Items.Strings = (
+                'a  vencer'
+                'vencidas'
+                'antigas'
+                'Pagas'
+                'todas'
+                'vencendo'
+              )
             end
             inherited dtsGrid: TDataSource
               DataSet = qryContasCli
@@ -453,6 +458,14 @@ object frmPrincipal: TfrmPrincipal
         end
         inherited rgFiltros: TRadioGroup
           ItemIndex = 0
+          Items.Strings = (
+            'a  vencer'
+            'vencidas'
+            'antigas'
+            'Pagas'
+            'todas'
+            'vencendo'
+          )
         end
         inherited dtsGrid: TDataSource
           DataSet = qryContas

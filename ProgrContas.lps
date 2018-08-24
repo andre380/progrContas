@@ -9,7 +9,7 @@
         <Filename Value="ProgrContas.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="12" Y="18"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="169"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,9 +20,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrincipal"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="253"/>
-        <CursorPos X="75" Y="258"/>
-        <UsageCount Value="166"/>
+        <TopLine Value="389"/>
+        <CursorPos X="5" Y="395"/>
+        <UsageCount Value="169"/>
         <Bookmarks Count="1">
           <Item0 X="3" Y="426" ID="1"/>
         </Bookmarks>
@@ -37,7 +37,7 @@
         <ResourceBaseClass Value="Frame"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="25" Y="11"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="169"/>
       </Unit2>
       <Unit3>
         <Filename Value="units\frames\uframecliente.pas"/>
@@ -46,10 +46,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="uframeCliente"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="48"/>
-        <CursorPos X="17" Y="59"/>
-        <UsageCount Value="166"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="91"/>
+        <CursorPos X="28" Y="102"/>
+        <UsageCount Value="169"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="units\frames\ufracadastracontas.pas"/>
@@ -58,11 +60,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="ufraCadastracontas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="27"/>
-        <CursorPos X="3" Y="46"/>
-        <UsageCount Value="165"/>
+        <TopLine Value="55"/>
+        <CursorPos X="16" Y="73"/>
+        <UsageCount Value="168"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="units\frames\ufralistaclientes.pas"/>
@@ -74,7 +78,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
         <CursorPos X="13" Y="38"/>
-        <UsageCount Value="161"/>
+        <UsageCount Value="164"/>
       </Unit5>
       <Unit6>
         <Filename Value="units\frames\ufracadcheque.pas"/>
@@ -86,7 +90,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="69"/>
         <CursorPos X="34" Y="60"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="163"/>
       </Unit6>
       <Unit7>
         <Filename Value="units\frames\ufralistacheques.pas"/>
@@ -98,7 +102,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="37"/>
         <CursorPos X="4" Y="49"/>
-        <UsageCount Value="158"/>
+        <UsageCount Value="161"/>
       </Unit7>
       <Unit8>
         <Filename Value="units\frames\ufraListaContas.pas"/>
@@ -107,11 +111,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="ufraListacontas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="115"/>
-        <CursorPos X="102" Y="125"/>
-        <UsageCount Value="139"/>
+        <TopLine Value="75"/>
+        <CursorPos X="114" Y="106"/>
+        <UsageCount Value="142"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
@@ -121,7 +124,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos X="40" Y="32"/>
-        <UsageCount Value="129"/>
+        <UsageCount Value="132"/>
       </Unit9>
       <Unit10>
         <Filename Value="FGint\FGInt.pas"/>
@@ -129,7 +132,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="118"/>
         <CursorPos X="10" Y="134"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="84"/>
         <Bookmarks Count="1">
           <Item0 Y="2746" ID="2"/>
         </Bookmarks>
@@ -462,7 +465,7 @@
         <UsageCount Value="10"/>
       </Unit52>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="units\uprincipal.pas"/>
         <Caret Line="259" TopLine="251"/>
@@ -551,6 +554,22 @@
         <Filename Value="units\frames\ufraListaContas.pas"/>
         <Caret Line="139" Column="75" TopLine="110"/>
       </Position22>
+      <Position23>
+        <Filename Value="units\frames\ufraListaContas.pas"/>
+        <Caret Line="135" Column="64" TopLine="115"/>
+      </Position23>
+      <Position24>
+        <Filename Value="units\frames\uframecliente.pas"/>
+        <Caret Line="150" Column="36" TopLine="139"/>
+      </Position24>
+      <Position25>
+        <Filename Value="units\uprincipal.pas"/>
+        <Caret Line="399" Column="57" TopLine="389"/>
+      </Position25>
+      <Position26>
+        <Filename Value="units\frames\uframecliente.pas"/>
+        <Caret Line="38" Column="19" TopLine="24"/>
+      </Position26>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
